@@ -2,6 +2,23 @@ const API_BASE = '';
 
 let printersConfig = [];
 
+const PRINTER_MODELS = [
+    { value: 'p1s', label: 'P1S' },
+    { value: 'p1p', label: 'P1P' },
+    { value: 'a1', label: 'A1' },
+    { value: 'x1c', label: 'X1C' },
+    { value: 'x1', label: 'X1' },
+    { value: 'p2s', label: 'P2S' },
+    { value: 'h2s', label: 'H2S' },
+    { value: 'h2d', label: 'H2D' },
+];
+
+function modelOptions(selected) {
+    return PRINTER_MODELS.map(m =>
+        `<option value="${m.value}" ${m.value === selected ? 'selected' : ''}>${m.label}</option>`
+    ).join('');
+}
+
 // Load printer configuration
 async function loadPrinters() {
     try {
@@ -53,16 +70,23 @@ function renderPrinterForms() {
                         <input type="text"
                                id="code-${printer.id}"
                                value="${printer.access_code}"
-                               placeholder="8 digits"
-                               pattern="[0-9]{8}">
+                               placeholder="e.g., 12345678 or 922a6756">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="serial-${printer.id}">Serial Number <span class="optional">(Optional - needed for MQTT status)</span></label>
-                    <input type="text"
-                           id="serial-${printer.id}"
-                           value="${printer.serial || ''}"
-                           placeholder="e.g., 01S00A000000000">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="model-${printer.id}">Printer Model</label>
+                        <select id="model-${printer.id}">
+                            ${modelOptions(printer.model || 'p1s')}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serial-${printer.id}">Serial Number <span class="optional">(Optional - needed for MQTT status)</span></label>
+                        <input type="text"
+                               id="serial-${printer.id}"
+                               value="${printer.serial || ''}"
+                               placeholder="e.g., 01S00A000000000">
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="button" onclick="testMQTT(${printer.id})" class="btn btn-test">
@@ -91,7 +115,6 @@ async function addPrinter() {
     showStatus('Adding new printer...', 'info');
 
     try {
-        // Get next ID
         const maxId = printersConfig.length > 0 ? Math.max(...printersConfig.map(p => p.id)) : 0;
         const newId = maxId + 1;
 
@@ -105,7 +128,8 @@ async function addPrinter() {
                 name: `Printer ${newId}`,
                 ip: '',
                 access_code: '',
-                serial: ''
+                serial: '',
+                model: 'p1s'
             })
         });
 
@@ -141,7 +165,6 @@ async function deletePrinter(printerId) {
 
         showStatus('✓ Printer deleted successfully!', 'success');
 
-        // Reconnect MQTT after deletion
         await reconnectMQTT();
         await loadPrinters();
 
@@ -161,24 +184,21 @@ async function saveAll() {
             const ip = document.getElementById(`ip-${printer.id}`).value;
             const code = document.getElementById(`code-${printer.id}`).value;
             const serial = document.getElementById(`serial-${printer.id}`).value;
+            const model = document.getElementById(`model-${printer.id}`).value;
 
-            // Validate inputs
             if (!name || !ip || !code) {
-                throw new Error(`Please fill all fields for Printer ${printer.id}`);
+                throw new Error(`Please fill all required fields for Printer ${printer.id}`);
             }
 
-            // Validate IP format
             const ipPattern = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
             if (!ipPattern.test(ip)) {
                 throw new Error(`Invalid IP address for Printer ${printer.id}`);
             }
 
-            // Validate access code
-            if (code.length !== 8 || !/^[0-9]+$/.test(code)) {
-                throw new Error(`Invalid access code for Printer ${printer.id} (must be 8 digits)`);
+            if (code.length < 6 || code.length > 16) {
+                throw new Error(`Invalid access code for Printer ${printer.id} (must be 6-16 characters)`);
             }
 
-            // Update printer
             const response = await fetch(`${API_BASE}/api/config/printers/${printer.id}`, {
                 method: 'PUT',
                 headers: {
@@ -188,7 +208,8 @@ async function saveAll() {
                     name: name,
                     ip: ip,
                     access_code: code,
-                    serial: serial
+                    serial: serial,
+                    model: model
                 })
             });
 
@@ -197,12 +218,11 @@ async function saveAll() {
             }
         }
 
-        showStatus('✓ Configuration saved! Reconnecting MQTT...', 'success');
+        showStatus('✓ Configuration saved! Reloading streams...', 'success');
 
-        // Auto-reconnect MQTT after config changes
         await reconnectMQTT();
+        await reloadConfig();
 
-        // Reload configuration after 2 seconds
         setTimeout(() => {
             loadPrinters();
         }, 2000);
@@ -258,14 +278,13 @@ async function testMQTT(printerId) {
     const statusEl = document.getElementById(`mqtt-status-${printerId}`);
     statusEl.innerHTML = '<span class="testing">🔄 Testing MQTT connection...</span>';
 
-    // First save the current config for this printer
     try {
         const name = document.getElementById(`name-${printerId}`).value;
         const ip = document.getElementById(`ip-${printerId}`).value;
         const code = document.getElementById(`code-${printerId}`).value;
         const serial = document.getElementById(`serial-${printerId}`).value;
+        const model = document.getElementById(`model-${printerId}`).value;
 
-        // Save current config first
         await fetch(`${API_BASE}/api/config/printers/${printerId}`, {
             method: 'PUT',
             headers: {
@@ -275,11 +294,11 @@ async function testMQTT(printerId) {
                 name: name,
                 ip: ip,
                 access_code: code,
-                serial: serial
+                serial: serial,
+                model: model
             })
         });
 
-        // Now test the connection
         const response = await fetch(`${API_BASE}/api/status/mqtt-test/${printerId}`, {
             method: 'POST'
         });
@@ -341,14 +360,10 @@ function showStatus(message, type) {
 async function exportConfig() {
     try {
         showStatus('📥 Exporting configuration...', 'info');
-
-        // Trigger download by opening the export endpoint
         window.location.href = `${API_BASE}/api/config/export`;
-
         setTimeout(() => {
             showStatus('✓ Configuration exported successfully!', 'success');
         }, 1000);
-
     } catch (error) {
         console.error('Error exporting configuration:', error);
         showStatus(`✗ Error: ${error.message}`, 'error');
@@ -361,7 +376,7 @@ async function importConfig(event) {
     if (!file) return;
 
     if (!confirm('Are you sure you want to import this configuration? This will replace all current printer settings.')) {
-        event.target.value = ''; // Clear file input
+        event.target.value = '';
         return;
     }
 
@@ -384,10 +399,8 @@ async function importConfig(event) {
 
         showStatus(`✓ ${result.message}`, 'success');
 
-        // Reconnect MQTT after import
         await reconnectMQTT();
 
-        // Reload the printer list
         setTimeout(() => {
             loadPrinters();
         }, 2000);
@@ -396,7 +409,6 @@ async function importConfig(event) {
         console.error('Error importing configuration:', error);
         showStatus(`✗ Error: ${error.message}`, 'error');
     } finally {
-        // Clear file input
         event.target.value = '';
     }
 }
