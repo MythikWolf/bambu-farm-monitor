@@ -2,7 +2,7 @@
 
 A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers. Monitor your entire print farm from a single dashboard with real-time video streams and MQTT status updates.
 
-![Version](https://img.shields.io/badge/version-3.3.9-blue.svg)
+![Version](https://img.shields.io/badge/version-3.4.0-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/neospektra/bambu-farm-monitor)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -34,7 +34,7 @@ A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers
 - 🔧 **No External Dependencies** - Fully self-contained with bundled assets
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile devices
 - 🏢 **NAS Compatible** - Tested on QNAP, Synology, Unraid with Docker/Podman
-- 🌐 **Generic Branding** - Works with all Bambu Lab printer models (P1S, X1C, A1, etc.)
+- 🌐 **Generic Branding** - Works with all Bambu Lab printer models (P1S, X1C, A1, H2S, etc.)
 
 ## 🚀 Quick Start
 
@@ -142,6 +142,7 @@ podman run -d \
    - **IP Address**: Local network IP (e.g., `192.168.1.100`)
    - **Access Code**: 8-digit MQTT access code from printer settings
    - **Serial Number**: Printer serial number (recommended for status monitoring)
+   - **Printer Model**: Select your model from the dropdown
 5. Click "Complete Setup" - MQTT connections will initialize automatically
 6. Your dashboard will load with live streams and status updates
 
@@ -168,7 +169,7 @@ podman run -d \
 
 Access the Settings page (⚙️ icon in header):
 - **Add Printer**: Click "➕ Add Printer" button
-- **Edit Printer**: Modify IP, access code, or serial number
+- **Edit Printer**: Modify IP, access code, serial number, or model
 - **Remove Printer**: Click "🗑️ Remove" button on any printer
 - **Test Connection**: Use "🔌 Test MQTT Connection" to verify settings
 - **Save Changes**: Click "💾 Save All Changes" (auto-reconnects MQTT)
@@ -187,7 +188,7 @@ docker run -d \
   -e PRINTER1_SERIAL="01P00A411800001" \
   -e PRINTER2_IP="192.168.1.101" \
   -e PRINTER2_CODE="87654321" \
-  -e PRINTER2_NAME="Farm P1S #2" \
+  -e PRINTER2_NAME="Farm X1C #1" \
   -e PRINTER2_SERIAL="01P00A411800002" \
   neospektra/bambu-farm-monitor:latest
 ```
@@ -242,8 +243,8 @@ The automated script handles:
    - Container Port 1984 → Local Port 1984
    - Container Port 5000 → Local Port 5000
    - Container Port 5001 → Local Port 5001
-6. Add volume: `/app/config` → `/docker/bambu-config`
-7. Start the container
+8. Add volume: `/app/config` → `/docker/bambu-config`
+9. Start the container
 
 ### Unraid
 
@@ -302,6 +303,9 @@ docker run -d \
   -p 5003:5001 \
   neospektra/bambu-farm-monitor:latest
 ```
+
+### P1P/P1S MQTT not connecting
+The P1P and P1S only allow a single MQTT connection at a time. If your printer is connected to Bambu Cloud, the monitor will be refused with error code 7. You must choose between cloud connectivity and local monitoring for these models. X1C and H2S handle multiple connections without this limitation.
 
 ## 🔒 Security Considerations
 
@@ -380,7 +384,14 @@ Areas that need help:
 
 ## 📋 Changelog
 
-### v3.3.9 (Latest)
+### v3.4.0 (Latest)
+- ✅ Rewrote `entrypoint.sh` to correctly implement `rtspx://` direct connections, fixing camera streams for X1C, P2S, and H2S printers
+- ✅ Fixed `entrypoint.sh` bugs that prevented `go2rtc.yaml` and `printers.json` from generating correctly
+- ✅ Added printer model dropdown to settings UI
+- ✅ Modernized `style.css`
+- 🙏 Camera stream fix research by [@kitaro5053](https://github.com/kitaro5053) in [#5](https://github.com/neospektra/bambu-farm-monitor/issues/5)
+
+### v3.3.9
 - ✅ Added nginx sub_filter to replace go2rtc's hardcoded GitHub manifest URL with local copy
 - ✅ Proxied content now references /manifest.json instead of external GitHub URL
 - ✅ Eliminates CORS errors from go2rtc stream viewer
@@ -461,6 +472,7 @@ Areas that need help:
 - Resizing windows on mobile is disabled (by design)
 - Initial MQTT connection may take 5-10 seconds
 - Some printers may require serial number for status monitoring
+- P1P/P1S models only support a single MQTT connection — cloud connectivity and local monitoring are mutually exclusive
 
 ## 📜 License
 
@@ -470,6 +482,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [go2rtc](https://github.com/AlexxIT/go2rtc) - Excellent WebRTC streaming solution
 - [BambuSource2Raw](https://github.com/hisptoot/BambuSource2Raw) - Bambu camera streaming protocol
+- [@kitaro5053](https://github.com/kitaro5053) - Research and documentation of the `rtspx://` camera stream fix ([#5](https://github.com/neospektra/bambu-farm-monitor/issues/5))
 - Bambu Lab community for documentation and support
 
 ## 📧 Support
