@@ -2,11 +2,7 @@ FROM debian:12-slim
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    unzip \
-    gcc \
-    g++ \
-    libcurl4-openssl-dev \
-    libcjson-dev \
+    curl \
     nginx \
     supervisor \
     python3 \
@@ -16,20 +12,15 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy and extract Bambu Studio plugins from local build assets
-COPY build_assets/linux_01.04.00.15.zip /tmp/linux_01.04.00.15.zip
-RUN unzip -q /tmp/linux_01.04.00.15.zip -d /app && rm /tmp/linux_01.04.00.15.zip
+# Download go2rtc binary directly
+RUN curl -L https://github.com/AlexxIT/go2rtc/releases/download/v1.9.4/go2rtc_linux_amd64 -o /usr/local/bin/go2rtc \
+    && chmod +x /usr/local/bin/go2rtc
 
-# Copy go2rtc binary from local build assets
-COPY build_assets/go2rtc_linux_amd64 /usr/local/bin/go2rtc
-RUN chmod +x /usr/local/bin/go2rtc
-
-# Copy BambuSource2Raw source files from local build assets
-COPY build_assets/bambusource2raw.cpp build_assets/BambuTunnel.h build_assets/cJSON.c build_assets/cJSON.h /tmp/bambu_src/
-RUN cd /tmp/bambu_src && \
-    gcc bambusource2raw.cpp cJSON.c -lcurl -o /app/BambuP1SCam && \
-    chmod +x /app/BambuP1SCam && \
-    rm -rf /tmp/bambu_src
+# Copy BambuP1SCam and required libraries from build_assets
+COPY build_assets/BambuP1SCam /app/BambuP1SCam
+COPY build_assets/libBambuSource.so /app/libBambuSource.so
+COPY build_assets/libbambu_networking.so /app/libbambu_networking.so
+RUN chmod +x /app/BambuP1SCam
 
 # Install Python dependencies for API
 COPY api/requirements.txt /app/api/requirements.txt
@@ -53,6 +44,5 @@ RUN chmod +x /app/entrypoint.sh && \
 # 5001: Status API
 EXPOSE 8080 1984 5000 5001
 
-# Use supervisor to manage multiple processes
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

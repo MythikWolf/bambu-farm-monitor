@@ -2,48 +2,13 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
-      - "8080:8080"   # Web UI
+      - "8081:8080"   # Web UI
       - "1984:1984"   # go2rtc API
-    environment:
-      # Printer 1: Example Printer 1
-      - PRINTER1_IP=${PRINTER1_IP:-192.168.1.100}
-      - PRINTER1_CODE=${PRINTER1_CODE:-12345678}
-      - PRINTER1_NAME=${PRINTER1_NAME:-Printer 1}
-
-      # Printer 2: Example Printer 2
-      - PRINTER2_IP=${PRINTER2_IP:-192.168.1.101}
-      - PRINTER2_CODE=${PRINTER2_CODE:-23456789}
-      - PRINTER2_NAME=${PRINTER2_NAME:-Printer 2}
-
-      # Printer 3: Example Printer 3
-      - PRINTER3_IP=${PRINTER3_IP:-192.168.1.102}
-      - PRINTER3_CODE=${PRINTER3_CODE:-34567890}
-      - PRINTER3_NAME=${PRINTER3_NAME:-Printer 3}
-
-      # Printer 4: Example Printer 4
-      - PRINTER4_IP=${PRINTER4_IP:-192.168.1.103}
-      - PRINTER4_CODE=${PRINTER4_CODE:-45678901}
-      - PRINTER4_NAME=${PRINTER4_NAME:-Printer 4}
-
+      - "5000:5000"   # Config API
+      - "5001:5001"   # Status API
+    volumes:
+      - ./config:/app/config
     restart: unless-stopped
-    network_mode: bridge
-
-    # Optional: Add volume for persistent logs
-    # volumes:
-    #   - ./logs:/var/log
-
-    # Optional: Resource limits (adjust based on your QNAP)
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '2'
-    #       memory: 2G
-    #     reservations:
-    #       cpus: '1'
-    #       memory: 512M
