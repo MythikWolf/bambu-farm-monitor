@@ -11,6 +11,7 @@ import os
 import subprocess
 import signal
 from datetime import datetime
+from urllib.parse import quote
 
 app = Flask(__name__)
 CORS(app)
@@ -33,18 +34,28 @@ def save_config(config):
     with open(CONFIG_FILE, 'w') as f:
         json.dump(config, f, indent=2)
 
+def rtspx_stream_url(ip, access_code):
+    """Build go2rtc's native RTSP-over-TLS URL for Bambu Lab cameras"""
+    return f"rtspx://bblp:{quote(str(access_code), safe='')}@{ip}:322/streaming/live/1"
+
 def regenerate_go2rtc_config(config):
     """Regenerate go2rtc.yaml from printer configuration"""
-    streams_config = "streams:\n"
+    stream_lines = []
 
     for printer in config['printers']:
         printer_id = printer['id']
         name = printer['name']
-        ip = printer['ip']
-        code = printer['access_code']
+        ip = str(printer.get('ip', '')).strip()
+        code = str(printer.get('access_code', '')).strip()
 
-        streams_config += f"  # Printer {printer_id}: {name}\n"
-        streams_config += f"  printer{printer_id}: \"exec:/app/stream{printer_id}.sh#video=h264#hardware\"\n\n"
+        if not ip or not code:
+            continue
+
+        stream_lines.append(f"  # Printer {printer_id}: {str(name).replace(chr(10), ' ')}")
+        stream_lines.append(f"  printer{printer_id}: \"{rtspx_stream_url(ip, code)}\"")
+        stream_lines.append("")
+
+    streams_config = "streams:\n" + "\n".join(stream_lines) + "\n" if stream_lines else "streams: {}\n"
 
     full_config = streams_config + """
 # API settings
@@ -64,24 +75,6 @@ log:
 
     with open(GO2RTC_YAML, 'w') as f:
         f.write(full_config)
-
-    # Regenerate stream wrapper scripts
-    for printer in config['printers']:
-        printer_id = printer['id']
-        ip = printer['ip']
-        code = printer['access_code']
-
-        script_path = f'/app/stream{printer_id}.sh'
-        script_content = f"""#!/bin/bash
-export LD_LIBRARY_PATH=/app:$LD_LIBRARY_PATH
-cd /app
-exec ./BambuP1SCam start_stream_local -s {ip} -a {code}
-"""
-
-        with open(script_path, 'w') as f:
-            f.write(script_content)
-
-        os.chmod(script_path, 0o755)
 
 def restart_go2rtc():
     """Restart go2rtc to apply new configuration"""
@@ -116,6 +109,8 @@ def update_printer(printer_id):
                 printer['access_code'] = data['access_code']
             if 'serial' in data:
                 printer['serial'] = data['serial']
+            if 'model' in data:
+                printer['model'] = data['model']
 
             # Save configuration
             save_config(config)
@@ -203,7 +198,8 @@ def add_printer():
         "name": data.get('name', f'Printer {next_id}'),
         "ip": data.get('ip', ''),
         "access_code": data.get('access_code', ''),
-        "serial": data.get('serial', '')
+        "serial": data.get('serial', ''),
+        "model": data.get('model', '')
     }
 
     config['printers'].append(new_printer)
@@ -227,7 +223,8 @@ def bulk_update_printers():
             "name": printer_data.get('name', f'Printer {i}'),
             "ip": printer_data.get('ip', ''),
             "access_code": printer_data.get('access_code', ''),
-            "serial": printer_data.get('serial', '')
+            "serial": printer_data.get('serial', ''),
+            "model": printer_data.get('model', '')
         })
 
     save_config(config)

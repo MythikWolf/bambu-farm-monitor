@@ -1,12 +1,10 @@
+FROM alexxit/go2rtc:1.9.4 AS go2rtc
+
 FROM debian:12-slim
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    unzip \
-    gcc \
-    g++ \
-    libcurl4-openssl-dev \
-    libcjson-dev \
+    bash \
     nginx \
     supervisor \
     python3 \
@@ -16,20 +14,9 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy and extract Bambu Studio plugins from local build assets
-COPY build_assets/linux_01.04.00.15.zip /tmp/linux_01.04.00.15.zip
-RUN unzip -q /tmp/linux_01.04.00.15.zip -d /app && rm /tmp/linux_01.04.00.15.zip
-
-# Copy go2rtc binary from local build assets
-COPY build_assets/go2rtc_linux_amd64 /usr/local/bin/go2rtc
+# Copy go2rtc binary from the official image
+COPY --from=go2rtc /usr/local/bin/go2rtc /usr/local/bin/go2rtc
 RUN chmod +x /usr/local/bin/go2rtc
-
-# Copy BambuSource2Raw source files from local build assets
-COPY build_assets/bambusource2raw.cpp build_assets/BambuTunnel.h build_assets/cJSON.c build_assets/cJSON.h /tmp/bambu_src/
-RUN cd /tmp/bambu_src && \
-    gcc bambusource2raw.cpp cJSON.c -lcurl -o /app/BambuP1SCam && \
-    chmod +x /app/BambuP1SCam && \
-    rm -rf /tmp/bambu_src
 
 # Install Python dependencies for API
 COPY api/requirements.txt /app/api/requirements.txt
@@ -43,7 +30,8 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY entrypoint.sh /app/entrypoint.sh
 COPY api/ /app/api/
 
-RUN chmod +x /app/entrypoint.sh && \
+RUN sed -i 's/\r$//' /app/entrypoint.sh /app/api/*.py && \
+    chmod +x /app/entrypoint.sh && \
     chmod +x /app/api/*.py
 
 # Expose ports

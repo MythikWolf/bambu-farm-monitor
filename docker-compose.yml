@@ -15,21 +15,28 @@ services:
       - PRINTER1_IP=${PRINTER1_IP:-192.168.1.100}
       - PRINTER1_CODE=${PRINTER1_CODE:-12345678}
       - PRINTER1_NAME=${PRINTER1_NAME:-Printer 1}
+      - PRINTER1_MODEL=${PRINTER1_MODEL:-p1s}
 
       # Printer 2: Example Printer 2
       - PRINTER2_IP=${PRINTER2_IP:-192.168.1.101}
       - PRINTER2_CODE=${PRINTER2_CODE:-23456789}
       - PRINTER2_NAME=${PRINTER2_NAME:-Printer 2}
+      - PRINTER2_MODEL=${PRINTER2_MODEL:-x1c}
 
       # Printer 3: Example Printer 3
       - PRINTER3_IP=${PRINTER3_IP:-192.168.1.102}
       - PRINTER3_CODE=${PRINTER3_CODE:-34567890}
       - PRINTER3_NAME=${PRINTER3_NAME:-Printer 3}
+      - PRINTER3_MODEL=${PRINTER3_MODEL:-p2s}
 
       # Printer 4: Example Printer 4
       - PRINTER4_IP=${PRINTER4_IP:-192.168.1.103}
       - PRINTER4_CODE=${PRINTER4_CODE:-45678901}
       - PRINTER4_NAME=${PRINTER4_NAME:-Printer 4}
+      - PRINTER4_MODEL=${PRINTER4_MODEL:-h2s}
+
+      # Entrypoint scans PRINTER{N}_* variables up to this count
+      - MAX_PRINTERS=${MAX_PRINTERS:-16}
 
     restart: unless-stopped
     network_mode: bridge
