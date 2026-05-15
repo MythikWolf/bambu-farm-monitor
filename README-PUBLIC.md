@@ -2,13 +2,13 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/neospektra/bambu-farm-monitor)
-![Version](https://img.shields.io/badge/version-2.0-green.svg)
+![Version](https://img.shields.io/badge/version-3.4.0-green.svg)
 
 A unified web-based monitoring solution for Bambu Labs 3D printers with real-time video streaming and MQTT status integration.
 
 ## Features
 
-- **Live Video Streaming**: Low-latency WebRTC streams from up to 4 printers via go2rtc
+- **Live Video Streaming**: Low-latency WebRTC streams from Bambu Lab printers via go2rtc native `rtspx://`
 - **Real-time Status Monitoring**: MQTT integration for live print status, temperatures, progress, and layer information
 - **Setup Wizard**: Easy first-time configuration with guided setup
 - **Dynamic Configuration**: Web-based interface to manage printer settings without rebuilding
@@ -55,7 +55,7 @@ services:
 
 On first run, you'll be greeted with a setup wizard that guides you through:
 
-1. **Select Number of Printers** (1-4)
+1. **Select Number of Printers**
 2. **Configure Each Printer**:
    - Printer Name
    - IP Address
@@ -83,7 +83,7 @@ On first run, you'll be greeted with a setup wizard that guides you through:
 │   - Reverse Proxy        │
 └──────┬───────────────────┘
        │
-       ├──> go2rtc (Port 1984)  ──> BambuP1SCam ──> Printer Camera
+       ├──> go2rtc (Port 1984)  ──> rtspx:// ──> Printer Camera
        ├──> Config API (5000)   ──> printers.json
        └──> Status API (5001)   ──> MQTT Clients ──> Printer Status
 ```
@@ -111,6 +111,8 @@ Pre-configure printers using environment variables:
 ```
 
 Repeat for PRINTER2_, PRINTER3_, PRINTER4_
+
+The container startup path scans `PRINTER{N}_*` variables up to `MAX_PRINTERS` (default `16`). Optional `PRINTER{N}_MODEL` values such as `p1s`, `x1c`, `p2s`, or `h2s` are stored in `printers.json`; camera streams use `rtspx://bblp:<access_code>@<ip>:322/streaming/live/1` for all configured printer models.
 
 ### Volume Mount
 
@@ -213,7 +215,6 @@ See [QNAP-DEPLOYMENT.md](QNAP-DEPLOYMENT.md) for detailed instructions on deploy
 ## Technology Stack
 
 - **[go2rtc](https://github.com/AlexxIT/go2rtc)**: WebRTC streaming server
-- **[BambuSource2Raw](https://github.com/hisptoot/BambuSource2Raw)**: Bambu camera stream connector
 - **Flask**: Python web framework for REST APIs
 - **paho-mqtt**: MQTT client for printer status
 - **nginx**: Web server and reverse proxy
@@ -230,7 +231,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 - **[AlexxIT](https://github.com/AlexxIT)** for go2rtc
-- **[hisptoot](https://github.com/hisptoot)** for BambuSource2Raw
 - **Bambu Lab** for making great printers
 
 ## Support

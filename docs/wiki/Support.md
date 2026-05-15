@@ -104,7 +104,7 @@ What I'm trying to do...
 **Environment**
 - OS: Ubuntu 22.04
 - Docker: 24.0.5
-- Bambu Farm Monitor: 3.3.9
+- Bambu Farm Monitor: 3.4.0
 - Printers: 2x P1S
 
 **What I've tried**
@@ -157,7 +157,7 @@ What actually happens.
 ## Environment
 - OS: [Ubuntu 22.04, Windows 11, macOS 13, etc.]
 - Docker version: [24.0.5]
-- Bambu Farm Monitor version: [3.3.9]
+- Bambu Farm Monitor version: [3.4.0]
 - Browser: [Chrome 120]
 - Printer model(s): [P1S, X1C, etc.]
 - Printer firmware: [1.2.3.4]
@@ -271,12 +271,12 @@ docker logs bambu-farm-monitor 2>&1 | grep -i go2rtc
 
 **Test RTSP directly:**
 ```bash
-# VLC: Open Network Stream
-rtsps://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1
+# go2rtc/VLC: Open Network Stream
+rtspx://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1
 
 # Or with FFmpeg:
 ffmpeg -rtsp_transport tcp \
-  -i "rtsps://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1" \
+  -i "rtspx://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1" \
   -frames:v 1 test.jpg
 ```
 
@@ -470,7 +470,7 @@ Video stream works for Printer 1 but shows black screen for Printer 2.
 
 Environment:
 - Ubuntu 22.04, Docker 24.0.5
-- Bambu Farm Monitor 3.3.9
+- Bambu Farm Monitor 3.4.0
 - 2x P1S printers on same network
 - Both wired ethernet
 

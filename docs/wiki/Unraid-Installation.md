@@ -329,7 +329,7 @@ See [Reverse Proxy Setup](Reverse-Proxy-Setup.md) for details.
    ```
    to specific version:
    ```
-   neospektra/bambu-farm-monitor:3.3.9
+   neospektra/bambu-farm-monitor:3.4.0
    ```
 4. Click **Apply**
 

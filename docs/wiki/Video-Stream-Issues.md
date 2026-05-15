@@ -4,18 +4,18 @@ Comprehensive troubleshooting guide for video streaming problems.
 
 ## Overview
 
-Bambu Farm Monitor uses go2rtc to proxy RTSP streams from your Bambu Lab printers. This guide helps diagnose and fix video streaming issues.
+Bambu Farm Monitor uses go2rtc to proxy Bambu Lab RTSP-over-TLS streams directly from your printers. This guide helps diagnose and fix video streaming issues.
 
 ## How Video Streaming Works
 
 **Architecture:**
 ```
-Printer RTSP → go2rtc (port 1984) → WebRTC/MSE → Browser
+Printer RTSP-over-TLS (port 322) → go2rtc (port 1984) → WebRTC/MSE → Browser
 ```
 
 **Components:**
-1. **Printer:** Streams RTSP video on local network
-2. **go2rtc:** Receives RTSP, converts to WebRTC/MSE
+1. **Printer:** Streams RTSP-over-TLS video on local network port 322
+2. **go2rtc:** Connects with `rtspx://`, converts to WebRTC/MSE
 3. **Browser:** Displays video via HTML5 video element
 
 **Authentication:** Uses printer IP and access code (8-digit MQTT password)
@@ -42,8 +42,8 @@ Printer RTSP → go2rtc (port 1984) → WebRTC/MSE → Browser
 # Test 1: Ping printer
 ping PRINTER_IP
 
-# Test 2: Check RTSP port (554)
-nc -zv PRINTER_IP 554
+# Test 2: Check Bambu camera port
+nc -zv PRINTER_IP 322
 
 # Test 3: Check go2rtc is running
 curl http://localhost:1984
@@ -83,11 +83,11 @@ docker exec bambu-farm-monitor ping PRINTER_IP
 
 **Check Firewall Rules:**
 ```bash
-# Ensure port 554 (RTSP) is not blocked
+# Ensure port 322 is not blocked
 # Disable firewall temporarily to test:
 sudo ufw disable  # Ubuntu/Debian
 # Or check specific rules:
-sudo iptables -L -n | grep 554
+sudo iptables -L -n | grep 322
 ```
 
 **Restart go2rtc:**
@@ -121,8 +121,8 @@ curl http://localhost:1984/api/streams | jq .
 # Check go2rtc logs
 docker logs bambu-farm-monitor 2>&1 | grep -i stream
 
-# Test RTSP URL manually
-ffmpeg -i "rtsps://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1" \
+# Test RTSP-over-TLS URL manually
+ffmpeg -i "rtspx://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1" \
   -frames:v 1 test.jpg
 ```
 
@@ -408,7 +408,7 @@ curl http://localhost:1984/api/streams | jq '.["printer-1"]'
 # Expected output:
 {
   "name": "printer-1",
-  "url": "rtsps://bblp:CODE@IP:322/streaming/live/1",
+  "url": "rtspx://bblp:CODE@IP:322/streaming/live/1",
   "consumers": [
     {
       "url": "webrtc",
@@ -425,7 +425,7 @@ curl http://localhost:1984/api/streams | jq '.["printer-1"]'
 2. **Media** → **Open Network Stream**
 3. Enter URL:
    ```
-   rtsps://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1
+   rtspx://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1
    ```
 4. Click **Play**
 
@@ -442,7 +442,7 @@ curl http://localhost:1984/api/streams | jq '.["printer-1"]'
 ```bash
 # Test stream and save frame
 ffmpeg -rtsp_transport tcp \
-  -i "rtsps://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1" \
+  -i "rtspx://bblp:ACCESS_CODE@PRINTER_IP:322/streaming/live/1" \
   -frames:v 1 -f image2 test.jpg
 
 # Check test.jpg - should show printer view
@@ -493,7 +493,7 @@ docker exec -it bambu-farm-monitor sh
 # Test connectivity
 ping PRINTER_IP
 telnet PRINTER_IP 322
-curl -v rtsps://bblp:CODE@PRINTER_IP:322/streaming/live/1
+curl -v rtspx://bblp:CODE@PRINTER_IP:322/streaming/live/1
 
 # Exit container
 exit

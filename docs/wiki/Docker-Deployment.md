@@ -110,9 +110,9 @@ https://hub.docker.com/r/neospektra/bambu-farm-monitor
 docker pull neospektra/bambu-farm-monitor:latest
 ```
 
-**`:3.3.9`** - Specific version
+**`:3.4.0`** - Specific version
 ```bash
-docker pull neospektra/bambu-farm-monitor:3.3.9
+docker pull neospektra/bambu-farm-monitor:3.4.0
 ```
 
 **`:dev`** - Development builds (not recommended for production)
@@ -122,7 +122,7 @@ docker pull neospektra/bambu-farm-monitor:dev
 
 ### Image Details
 
-**Base Image:** Alpine Linux
+**Base Image:** Debian 12 slim
 **Size:** ~500 MB
 **Architecture:** amd64/x86_64
 **Includes:**

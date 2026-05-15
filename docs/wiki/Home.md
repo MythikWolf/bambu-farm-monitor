@@ -50,11 +50,11 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 
 ## 🆕 Latest Updates
 
-### Version 3.3.9
-- ✅ Visual icon-based layout selector
-- ✅ AMS filament color display with humidity
-- ✅ Fixed CORS errors from go2rtc
-- ✅ Layout persistence across sessions
+### Version 3.4.0
+- ✅ Native go2rtc `rtspx://` camera streams
+- ✅ Fixed camera feeds for X1C, P2S, H2S, and newer Bambu Lab models
+- ✅ Optional `PRINTER{N}_MODEL` metadata
+- ✅ Environment startup scanning beyond four printers with `MAX_PRINTERS`
 
 See the full [Changelog](https://github.com/neospektra/bambu-farm-monitor/blob/main/README.md#-changelog) for details.
 

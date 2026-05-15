@@ -2,7 +2,7 @@
 
 A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers. Monitor your entire print farm from a single dashboard with real-time video streams and MQTT status updates.
 
-![Version](https://img.shields.io/badge/version-3.3.9-blue.svg)
+![Version](https://img.shields.io/badge/version-3.4.0-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/neospektra/bambu-farm-monitor)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -10,6 +10,7 @@ A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers
 
 ### Video & Streaming
 - 🎥 **Real-time Video Streams** - Live camera feeds from all your Bambu Lab printers using WebRTC via go2rtc
+- 🔐 **Native Bambu RTSP-over-TLS** - Uses go2rtc `rtspx://` camera streams directly, supporting P1/P2/X1/A1/H2 camera feeds without BambuP1SCam
 - 📐 **Resizable Windows** - Customize printer window sizes to your preference with drag handles
 - 🖼️ **Layout Options** - Choose from multiple grid layouts (1 column, 2x2, 2 columns, 3 columns, 4 columns)
 - 🎯 **Visual Layout Selector** - Icon-based layout buttons with active state highlighting
@@ -185,12 +186,17 @@ docker run -d \
   -e PRINTER1_CODE="12345678" \
   -e PRINTER1_NAME="Farm P1S #1" \
   -e PRINTER1_SERIAL="01P00A411800001" \
+  -e PRINTER1_MODEL="p1s" \
   -e PRINTER2_IP="192.168.1.101" \
   -e PRINTER2_CODE="87654321" \
-  -e PRINTER2_NAME="Farm P1S #2" \
+  -e PRINTER2_NAME="Farm X1C #1" \
   -e PRINTER2_SERIAL="01P00A411800002" \
+  -e PRINTER2_MODEL="x1c" \
+  -e MAX_PRINTERS="16" \
   neospektra/bambu-farm-monitor:latest
 ```
+
+The entrypoint scans `PRINTER{N}_*` variables up to `MAX_PRINTERS` (default `16`). `PRINTER{N}_MODEL` is optional metadata for future model-specific behavior; camera streaming uses the same native `rtspx://bblp:<access_code>@<ip>:322/streaming/live/1` path for all configured printers.
 
 ## 🏢 Platform-Specific Deployment
 
@@ -380,7 +386,14 @@ Areas that need help:
 
 ## 📋 Changelog
 
-### v3.3.9 (Latest)
+### v3.4.0 (Latest)
+- ✅ Switched camera streams from BambuP1SCam wrapper scripts to native go2rtc `rtspx://` URLs
+- ✅ Fixed camera support for X1C, P2S, H2S, and other models that fail with `start_stream_local`
+- ✅ Added optional `PRINTER{N}_MODEL` environment metadata
+- ✅ Extended startup environment scanning beyond four printers with `MAX_PRINTERS`
+- ✅ Removed local BambuP1SCam build asset dependency from Docker image builds
+
+### v3.3.9
 - ✅ Added nginx sub_filter to replace go2rtc's hardcoded GitHub manifest URL with local copy
 - ✅ Proxied content now references /manifest.json instead of external GitHub URL
 - ✅ Eliminates CORS errors from go2rtc stream viewer
@@ -469,7 +482,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [go2rtc](https://github.com/AlexxIT/go2rtc) - Excellent WebRTC streaming solution
-- [BambuSource2Raw](https://github.com/hisptoot/BambuSource2Raw) - Bambu camera streaming protocol
 - Bambu Lab community for documentation and support
 
 ## 📧 Support

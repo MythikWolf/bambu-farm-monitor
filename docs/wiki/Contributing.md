@@ -41,7 +41,7 @@ Both printers should show video streams.
 - OS: Ubuntu 22.04
 - Docker: 24.0.5
 - Browser: Chrome 120
-- Bambu Farm Monitor: 3.3.9
+- Bambu Farm Monitor: 3.4.0
 
 **Logs**
 ```
@@ -292,7 +292,7 @@ pylint *.py
 ```yaml
 streams:
   printer-1:
-    - "rtsps://bblp:{access_code}@{ip}:322/streaming/live/1"
+    - "rtspx://bblp:{access_code}@{ip}:322/streaming/live/1"
 
 api:
   listen: ":1984"
