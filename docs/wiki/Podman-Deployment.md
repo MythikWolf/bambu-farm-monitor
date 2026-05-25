@@ -136,7 +136,7 @@ Same as Docker deployment:
 
 **Pull image:**
 ```bash
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Run container:**
@@ -149,7 +149,7 @@ podman run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Access:**
@@ -172,7 +172,7 @@ podman run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Advantages:**
@@ -197,7 +197,7 @@ podman run -d \
   -p 5001:5001 \
   -v ~/bambu/config:/app/config:Z \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Note:** `:Z` flag sets SELinux context (required on RHEL/Fedora/CentOS).
@@ -220,7 +220,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: docker.io/neospektra/bambu-farm-monitor:latest
+    image: docker.io/mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -270,7 +270,7 @@ podman run -d \
   -p 5003:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 Access at: `http://localhost:8081`
@@ -324,7 +324,7 @@ podman run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v ~/bambu/config:/app/config:Z \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Without SELinux:**
@@ -334,7 +334,7 @@ podman run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v ~/bambu/config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 ## Systemd Integration
@@ -418,7 +418,7 @@ podman run -d \
   --name bambu-farm-monitor \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Advantages:**
@@ -451,7 +451,7 @@ podman pod rm -f bambu-pod
 ssh admin@QNAP_IP
 
 # Pull image
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 
 # Run container
 podman run -d \
@@ -459,7 +459,7 @@ podman run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v /share/Container/bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 
 # Verify
 podman ps
@@ -561,7 +561,7 @@ podman stats
 
 ```bash
 # Pull latest image
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 
 # Stop current container
 podman stop bambu-farm-monitor
@@ -575,7 +575,7 @@ podman run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Update with Systemd
@@ -586,7 +586,7 @@ podman run -d \
 systemctl --user stop bambu-farm-monitor
 
 # Pull new image
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 
 # Regenerate service (picks up new image)
 podman generate systemd --new --name bambu-farm-monitor > ~/.config/systemd/user/bambu-farm-monitor.service
@@ -707,7 +707,7 @@ podman run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  docker.io/neospektra/bambu-farm-monitor:latest
+  docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Benefits:**
@@ -741,10 +741,10 @@ podman run -d ... -v ~/bambu/config:/app/config:Z ...
 **Always specify registry:**
 ```bash
 # Explicit registry
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 
 # Not just
-podman pull neospektra/bambu-farm-monitor:latest
+podman pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 ## Advantages of Podman

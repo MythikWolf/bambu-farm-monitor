@@ -72,7 +72,7 @@ Synology NAS devices support Docker through the Container Manager package (forme
 1. Open **Container Manager**
 2. Go to **Registry** tab
 3. Search for: `bambu-farm-monitor`
-4. Find **neospektra/bambu-farm-monitor**
+4. Find **mythikwolf/bambu-farm-monitor**
 5. Click **Download**
 6. Select tag: **latest**
 7. Click **Select**
@@ -81,7 +81,7 @@ Synology NAS devices support Docker through the Container Manager package (forme
 1. Open **Docker**
 2. Go to **Registry** tab
 3. Search for: `bambu-farm-monitor`
-4. Double-click **neospektra/bambu-farm-monitor**
+4. Double-click **mythikwolf/bambu-farm-monitor**
 5. Select tag: **latest**
 6. Click **Select**
 
@@ -92,7 +92,7 @@ Wait for download to complete (~500 MB). Check **Image** tab to see progress.
 **After image downloads:**
 
 1. Go to **Image** tab
-2. Select **neospektra/bambu-farm-monitor:latest**
+2. Select **mythikwolf/bambu-farm-monitor:latest**
 3. Click **Launch**
 
 ### Step 5: Configure Container
@@ -190,7 +190,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -256,7 +256,7 @@ sudo chmod 777 /volume1/docker/bambu-config
 ### Step 4: Pull Image
 
 ```bash
-sudo docker pull neospektra/bambu-farm-monitor:latest
+sudo docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 5: Run Container
@@ -270,7 +270,7 @@ sudo docker run -d \
   -p 5001:5001 \
   -v /volume1/docker/bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 6: Verify
@@ -435,7 +435,7 @@ Include configuration in Hyper Backup:
 
 **DSM 7.0+:**
 1. **Container Manager** → **Registry**
-2. Search for `neospektra/bambu-farm-monitor`
+2. Search for `mythikwolf/bambu-farm-monitor`
 3. Click **Download** → Select **latest**
 4. Go to **Container** tab
 5. Stop `bambu-farm-monitor`
@@ -474,7 +474,7 @@ sudo docker-compose ps
 ssh admin@SYNOLOGY_IP
 
 # Pull latest image
-sudo docker pull neospektra/bambu-farm-monitor:latest
+sudo docker pull mythikwolf/bambu-farm-monitor:latest
 
 # Stop and remove old container
 sudo docker stop bambu-farm-monitor
@@ -486,7 +486,7 @@ sudo docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v /volume1/docker/bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ## Troubleshooting
@@ -667,4 +667,4 @@ Both versions fully supported.
 For Synology-specific issues:
 - Check Container Manager logs
 - Verify DSM version is up to date
-- Ask in [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- Ask in [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)

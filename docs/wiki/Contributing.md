@@ -11,7 +11,7 @@ Thank you for your interest in contributing to Bambu Farm Monitor! This guide wi
 ### 1. Report Bugs
 
 **Before Reporting:**
-- Search [existing issues](https://github.com/neospektra/bambu-farm-monitor/issues) to avoid duplicates
+- Search [existing issues](https://github.com/mythikwolf/bambu-farm-monitor/issues) to avoid duplicates
 - Check [Common Issues](Common-Issues.md) to see if it's a known problem
 - Verify you're running the latest version
 
@@ -55,7 +55,7 @@ Both printers should show video streams.
 ### 2. Suggest Features
 
 **Before Suggesting:**
-- Search [existing discussions](https://github.com/neospektra/bambu-farm-monitor/discussions) and issues
+- Search [existing discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions) and issues
 - Check [planned features](#future-roadmap)
 - Consider if it fits project scope
 
@@ -657,8 +657,8 @@ Check issues tagged with:
 ## Questions?
 
 **Need help getting started?**
-- Ask in [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
-- Check [existing issues](https://github.com/neospektra/bambu-farm-monitor/issues)
+- Ask in [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
+- Check [existing issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
 - Read the [documentation](Home.md)
 
 **Thank you for contributing!** 🎉

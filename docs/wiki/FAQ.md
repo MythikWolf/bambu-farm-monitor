@@ -277,7 +277,7 @@ docker volume rm bambu-config
 ### How do I update to the latest version?
 
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
 # Run docker run command again (same as installation)
@@ -363,14 +363,14 @@ Extremely unlikely. The application only reads MQTT data. It does not:
 
 1. **Documentation:** Start with this wiki
 2. **Common Issues:** [Common Issues](Common-Issues.md)
-3. **Discussions:** https://github.com/neospektra/bambu-farm-monitor/discussions
-4. **Bug Reports:** https://github.com/neospektra/bambu-farm-monitor/issues
+3. **Discussions:** https://github.com/mythikwolf/bambu-farm-monitor/discussions
+4. **Bug Reports:** https://github.com/mythikwolf/bambu-farm-monitor/issues
 
 ### How do I report a bug?
 
 1. Check [Common Issues](Common-Issues.md) first
-2. Search [existing issues](https://github.com/neospektra/bambu-farm-monitor/issues)
-3. If new, [open an issue](https://github.com/neospektra/bambu-farm-monitor/issues/new)
+2. Search [existing issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
+3. If new, [open an issue](https://github.com/mythikwolf/bambu-farm-monitor/issues/new)
 
 Include:
 - Version number (check footer)
@@ -381,7 +381,7 @@ Include:
 
 ### How do I request a feature?
 
-1. Check if it's already requested in [Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+1. Check if it's already requested in [Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 2. If not, start a new discussion in "Ideas" category
 3. Describe the feature and use case
 
@@ -406,7 +406,7 @@ Currently, all community interaction happens on GitHub:
 
 ### What license is this released under?
 
-MIT License. See [LICENSE](https://github.com/neospektra/bambu-farm-monitor/blob/main/LICENSE) file.
+MIT License. See [LICENSE](https://github.com/mythikwolf/bambu-farm-monitor/blob/main/LICENSE) file.
 
 ### Can I use this commercially?
 
@@ -423,7 +423,7 @@ Not required, but appreciated! Include a link to the GitHub repository if you fo
 ## Still Have Questions?
 
 - **Search the wiki:** Use the search bar at the top
-- **Ask in Discussions:** https://github.com/neospektra/bambu-farm-monitor/discussions
+- **Ask in Discussions:** https://github.com/mythikwolf/bambu-farm-monitor/discussions
 - **Check the issues:** Someone may have asked already
 - **Read the docs:** Most questions are answered in the guides
 

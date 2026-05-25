@@ -8,7 +8,7 @@ These markdown files are designed to be published to the GitHub wiki. To publish
 
 ### Method 1: Manual Copy (Easiest)
 
-1. Go to https://github.com/neospektra/bambu-farm-monitor/wiki
+1. Go to https://github.com/mythikwolf/bambu-farm-monitor/wiki
 2. Click "New Page" for each article
 3. Copy the content from each `.md` file
 4. Use the filename without `.md` as the page title (e.g., `Home`, `Installation-Guide`)
@@ -17,7 +17,7 @@ These markdown files are designed to be published to the GitHub wiki. To publish
 
 ```bash
 # Clone the wiki repository
-git clone https://github.com/neospektra/bambu-farm-monitor.wiki.git
+git clone https://github.com/mythikwolf/bambu-farm-monitor.wiki.git
 
 # Copy all wiki files
 cp docs/wiki/*.md bambu-farm-monitor.wiki/
@@ -35,7 +35,7 @@ These docs can also be served via GitHub Pages:
 
 1. Enable GitHub Pages in repository settings
 2. Point to the `docs` folder
-3. Documentation will be available at `https://neospektra.github.io/bambu-farm-monitor/`
+3. Documentation will be available at `https://mythikwolf.github.io/bambu-farm-monitor/`
 
 ## Wiki Structure
 
@@ -95,6 +95,6 @@ When updating the wiki:
 
 ## Links
 
-- **Main Repository**: https://github.com/neospektra/bambu-farm-monitor
-- **Wiki**: https://github.com/neospektra/bambu-farm-monitor/wiki
-- **Docker Hub**: https://hub.docker.com/r/neospektra/bambu-farm-monitor
+- **Main Repository**: https://github.com/mythikwolf/bambu-farm-monitor
+- **Wiki**: https://github.com/mythikwolf/bambu-farm-monitor/wiki
+- **Docker Hub**: https://hub.docker.com/r/mythikwolf/bambu-farm-monitor

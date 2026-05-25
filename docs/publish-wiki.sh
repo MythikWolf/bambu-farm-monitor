@@ -10,7 +10,7 @@ set -e
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 WIKI_DIR="$SCRIPT_DIR/wiki"
-WIKI_REPO="git@github.com:neospektra/bambu-farm-monitor.wiki.git"
+WIKI_REPO="git@github.com:mythikwolf/bambu-farm-monitor.wiki.git"
 TMP_DIR="/tmp/bambu-wiki-$$"
 
 echo "📚 Bambu Farm Monitor - Wiki Publisher"
@@ -40,7 +40,7 @@ if ! git clone "$WIKI_REPO" "$TMP_DIR" 2>&1; then
     echo "❌ Error: Could not clone wiki repository"
     echo ""
     echo "The wiki needs to be initialized first:"
-    echo "1. Go to https://github.com/neospektra/bambu-farm-monitor/wiki"
+    echo "1. Go to https://github.com/mythikwolf/bambu-farm-monitor/wiki"
     echo "2. Click 'Create the first page'"
     echo "3. Add any content and save"
     echo "4. Run this script again"
@@ -96,7 +96,7 @@ echo "🚀 Pushing to GitHub..."
 if git push; then
     echo "✅ Wiki published successfully!"
     echo ""
-    echo "🌐 View at: https://github.com/neospektra/bambu-farm-monitor/wiki"
+    echo "🌐 View at: https://github.com/mythikwolf/bambu-farm-monitor/wiki"
 else
     echo "❌ Error: Failed to push to GitHub"
     echo ""

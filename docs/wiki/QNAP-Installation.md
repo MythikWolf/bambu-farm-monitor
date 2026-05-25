@@ -48,7 +48,7 @@ QNAP NAS devices support Docker and Podman through Container Station. This guide
 2. Click **"Pull"** button at top
 3. In the search box, enter:
    ```
-   neospektra/bambu-farm-monitor
+   mythikwolf/bambu-farm-monitor
    ```
 4. Click **"Pull"** next to the result
 5. Select **"latest"** tag
@@ -62,7 +62,7 @@ Once the image is downloaded:
 
 1. Click **"Containers"** in left sidebar
 2. Click **"Create"** button
-3. Select **"neospektra/bambu-farm-monitor:latest"** from the list
+3. Select **"mythikwolf/bambu-farm-monitor:latest"** from the list
 4. Click **"Create Container"**
 
 ### Step 4: Configure Container
@@ -150,7 +150,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -196,7 +196,7 @@ ssh admin@QNAP_IP
 ### Step 3: Pull Image
 
 ```bash
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 4: Run Container
@@ -210,7 +210,7 @@ podman run -d \
   -p 5001:5001 \
   -v /share/Container/bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 5: Verify
@@ -330,7 +330,7 @@ If using QNAP snapshot feature:
 ### Via Container Station GUI
 
 1. Container Station → Images
-2. Click **"Pull"** → Search for `neospektra/bambu-farm-monitor`
+2. Click **"Pull"** → Search for `mythikwolf/bambu-farm-monitor`
 3. Pull **"latest"** tag
 4. Go to Containers → Stop `bambu-farm-monitor`
 5. Right-click → **"Recreate"**
@@ -347,7 +347,7 @@ docker-compose up -d
 ### Via Podman CLI
 
 ```bash
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 podman stop bambu-farm-monitor
 podman rm bambu-farm-monitor
 # Run the podman run command again
@@ -480,4 +480,4 @@ Instructions are the same for both.
 For QNAP-specific issues:
 - Check QNAP Container Station logs
 - Verify QTS version is up to date
-- Ask in [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- Ask in [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)

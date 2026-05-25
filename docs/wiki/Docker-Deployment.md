@@ -97,27 +97,27 @@ docker --version
 
 **Official Image:**
 ```
-neospektra/bambu-farm-monitor:latest
+mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Docker Hub URL:**
-https://hub.docker.com/r/neospektra/bambu-farm-monitor
+https://hub.docker.com/r/mythikwolf/bambu-farm-monitor
 
 ### Available Tags
 
 **`:latest`** - Most recent stable release
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 **`:3.3.9`** - Specific version
 ```bash
-docker pull neospektra/bambu-farm-monitor:3.3.9
+docker pull mythikwolf/bambu-farm-monitor:3.3.9
 ```
 
 **`:dev`** - Development builds (not recommended for production)
 ```bash
-docker pull neospektra/bambu-farm-monitor:dev
+docker pull mythikwolf/bambu-farm-monitor:dev
 ```
 
 ### Image Details
@@ -138,7 +138,7 @@ docker pull neospektra/bambu-farm-monitor:dev
 
 **Pull image:**
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Run container:**
@@ -151,7 +151,7 @@ docker run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Access:**
@@ -176,7 +176,7 @@ docker run -d \
   -p 5001:5001 \
   -v $(pwd)/config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Advantage:** Configuration accessible on host at `./config/printers.json`
@@ -189,7 +189,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -234,7 +234,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -261,7 +261,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     ports:
       - "8080:8080"
       - "1984:1984"
@@ -339,7 +339,7 @@ docker run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 Access at: `http://localhost:8081`
@@ -354,7 +354,7 @@ docker run -d \
   -p 9001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ## Volume Management
@@ -373,7 +373,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Inspect volume:**
@@ -406,7 +406,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v ./config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Absolute path:**
@@ -416,7 +416,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v /home/user/bambu/config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Permissions:**
@@ -437,7 +437,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 Container gets its own IP on default bridge network.
@@ -457,7 +457,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Host Network
@@ -469,7 +469,7 @@ docker run -d \
   --network host \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Note:** Port mapping not needed with host network. Container uses host's network directly.
@@ -493,7 +493,7 @@ docker run -d \
   --ip 192.168.1.200 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 Container gets its own MAC address and appears as separate device on network.
@@ -510,7 +510,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Set CPU shares (relative weight):**
@@ -521,7 +521,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Set Memory Limits
@@ -535,7 +535,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Combined Resource Limits
@@ -546,7 +546,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -654,7 +654,7 @@ docker stats
 
 ```bash
 # Pull latest image
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 
 # Stop current container
 docker stop bambu-farm-monitor
@@ -668,7 +668,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Note:** Configuration persists in volume.
@@ -699,7 +699,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:3.3.8
+  mythikwolf/bambu-farm-monitor:3.3.8
 ```
 
 ## Troubleshooting

@@ -244,7 +244,7 @@ function New-DockerComposeFile {
 version: '3.8'
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"   # Web UI
@@ -392,7 +392,7 @@ function Start-Installation {
     Write-Info "Pulling latest image from Docker Hub..."
 
     try {
-        & $containerCmd pull neospektra/bambu-farm-monitor:latest
+        & $containerCmd pull mythikwolf/bambu-farm-monitor:latest
         Write-Success "Image downloaded successfully"
     }
     catch {
@@ -490,7 +490,7 @@ function Start-Installation {
             }
         }
 
-        $runCmd += "-v bambu-config:/app/config neospektra/bambu-farm-monitor:latest"
+        $runCmd += "-v bambu-config:/app/config mythikwolf/bambu-farm-monitor:latest"
 
         try {
             Invoke-Expression $runCmd
@@ -538,7 +538,7 @@ function Start-Installation {
     Write-Host "  Start container: $containerCmd start bambu-farm-monitor"
     Write-Host "  Restart:         $containerCmd restart bambu-farm-monitor"
     Write-Host ""
-    Write-Info "For more information, visit: https://github.com/neospektra/bambu-farm-monitor"
+    Write-Info "For more information, visit: https://github.com/mythikwolf/bambu-farm-monitor"
     Write-Host ""
 
     # Open browser
@@ -559,7 +559,7 @@ try {
 catch {
     Write-Error "An unexpected error occurred: $_"
     Write-Host ""
-    Write-Info "Please report this issue at: https://github.com/neospektra/bambu-farm-monitor/issues"
+    Write-Info "Please report this issue at: https://github.com/mythikwolf/bambu-farm-monitor/issues"
     Write-Host ""
     Read-Host "Press Enter to exit"
     exit 1

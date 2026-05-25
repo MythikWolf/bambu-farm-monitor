@@ -39,7 +39,7 @@ We provide a PowerShell script that automates the entire setup process using win
 ### Quick Start
 
 1. **Download the installation script:**
-   - Download [`install-windows.ps1`](https://raw.githubusercontent.com/neospektra/bambu-farm-monitor/main/scripts/install-windows.ps1)
+   - Download [`install-windows.ps1`](https://raw.githubusercontent.com/mythikwolf/bambu-farm-monitor/main/scripts/install-windows.ps1)
    - Or clone this repository
 
 2. **Run the script as Administrator:**
@@ -158,7 +158,7 @@ docker run -d `
   -p 5000:5000 `
   -p 5001:5001 `
   -v bambu-config:/app/config `
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **For Podman users**, replace `docker` with `podman`:
@@ -171,7 +171,7 @@ podman run -d `
   -p 5000:5000 `
   -p 5001:5001 `
   -v bambu-config:/app/config `
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Method 2: Using Docker Compose (Recommended)
@@ -183,7 +183,7 @@ podman run -d `
    ```
 
 2. **Download docker-compose.yml:**
-   - Download from: https://raw.githubusercontent.com/neospektra/bambu-farm-monitor/main/docker-compose.yml
+   - Download from: https://raw.githubusercontent.com/mythikwolf/bambu-farm-monitor/main/docker-compose.yml
    - Or create the file manually (see below)
 
 3. **Create `docker-compose.yml`:**
@@ -192,7 +192,7 @@ podman run -d `
    version: '3.8'
    services:
      bambu-farm-monitor:
-       image: neospektra/bambu-farm-monitor:latest
+       image: mythikwolf/bambu-farm-monitor:latest
        container_name: bambu-farm-monitor
        ports:
          - "8080:8080"   # Web UI
@@ -225,7 +225,7 @@ You can configure up to 4 printers using environment variables in docker-compose
 version: '3.8'
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -319,7 +319,7 @@ podman rm bambu-farm-monitor
 ```powershell
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 # Then run the container again using Method 1 or Method 2
 ```
 
@@ -432,4 +432,4 @@ Now proceed to:
 
 - Check the [FAQ](FAQ.md)
 - Review [Common Issues](Common-Issues.md)
-- Open an issue on GitHub: https://github.com/neospektra/bambu-farm-monitor/issues
+- Open an issue on GitHub: https://github.com/mythikwolf/bambu-farm-monitor/issues

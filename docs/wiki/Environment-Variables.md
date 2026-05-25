@@ -79,7 +79,7 @@ docker run -d \
   -e PRINTER1_NAME="My P1S" \
   -e PRINTER1_SERIAL=01P00A411800001 \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Docker Compose:**
@@ -88,7 +88,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -129,7 +129,7 @@ docker run -d \
   -e PRINTER3_NAME="Farm X1C #1" \
   -e PRINTER3_SERIAL=01X00C411800001 \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Docker Compose:**
@@ -138,7 +138,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -204,7 +204,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -400,7 +400,7 @@ docker run -d \
   -v bambu-config:/app/config \
   $ENV_VARS \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Run:**
@@ -417,7 +417,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"
@@ -452,7 +452,7 @@ volumes:
 # main.tf
 resource "docker_container" "bambu_farm_monitor" {
   name  = "bambu-farm-monitor"
-  image = "neospektra/bambu-farm-monitor:latest"
+  image = "mythikwolf/bambu-farm-monitor:latest"
 
   ports {
     internal = 8080
@@ -555,7 +555,7 @@ terraform apply
     - name: Deploy Bambu Farm Monitor
       docker_container:
         name: bambu-farm-monitor
-        image: neospektra/bambu-farm-monitor:latest
+        image: mythikwolf/bambu-farm-monitor:latest
         state: started
         restart_policy: unless-stopped
         published_ports:

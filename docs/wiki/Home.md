@@ -43,10 +43,10 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 
 ## 🎯 Quick Links
 
-- **Docker Hub**: https://hub.docker.com/r/neospektra/bambu-farm-monitor
-- **GitHub Repository**: https://github.com/neospektra/bambu-farm-monitor
-- **Bug Reports**: https://github.com/neospektra/bambu-farm-monitor/issues
-- **Discussions**: https://github.com/neospektra/bambu-farm-monitor/discussions
+- **Docker Hub**: https://hub.docker.com/r/mythikwolf/bambu-farm-monitor
+- **GitHub Repository**: https://github.com/mythikwolf/bambu-farm-monitor
+- **Bug Reports**: https://github.com/mythikwolf/bambu-farm-monitor/issues
+- **Discussions**: https://github.com/mythikwolf/bambu-farm-monitor/discussions
 
 ## 🆕 Latest Updates
 
@@ -56,12 +56,12 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 - ✅ Fixed CORS errors from go2rtc
 - ✅ Layout persistence across sessions
 
-See the full [Changelog](https://github.com/neospektra/bambu-farm-monitor/blob/main/README.md#-changelog) for details.
+See the full [Changelog](https://github.com/mythikwolf/bambu-farm-monitor/blob/main/README.md#-changelog) for details.
 
 ## 🤝 Need Help?
 
 If you can't find what you're looking for:
 1. Check the [FAQ](FAQ.md)
-2. Search [existing issues](https://github.com/neospektra/bambu-farm-monitor/issues)
-3. Ask in [Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
-4. Open a [new issue](https://github.com/neospektra/bambu-farm-monitor/issues/new)
+2. Search [existing issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
+3. Ask in [Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
+4. Open a [new issue](https://github.com/mythikwolf/bambu-farm-monitor/issues/new)

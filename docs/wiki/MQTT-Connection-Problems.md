@@ -227,7 +227,7 @@ curl http://localhost:5001/api/status/printers/1 | jq .
 **Update to Latest Version:**
 ```bash
 # Newer versions have better MQTT parsing
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
 # Recreate container
@@ -300,7 +300,7 @@ curl -X POST http://localhost:5001/api/status/reconnect
 docker inspect bambu-farm-monitor | grep -i version
 
 # Update if old
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Check AMS MQTT Topic:**
@@ -742,7 +742,7 @@ curl -o bambu-backup.json http://localhost:5000/api/config/export
    ```
 
 **Where to ask:**
-- [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 - Include all above information
 - Be specific about what's not working
 

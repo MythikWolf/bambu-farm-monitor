@@ -1,10 +1,14 @@
 # Bambu Farm Monitor
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/neospektra/bambu-farm-monitor)
+![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
 ![Version](https://img.shields.io/badge/version-3.4.0-green.svg)
 
 A unified web-based monitoring solution for Bambu Lab 3D printers with real-time video streaming and MQTT status integration.
+
+## Fork Notice
+
+This is MythikWolf's maintained fork of Bambu Farm Monitor. It is based on the original work by [neospektra](https://github.com/neospektra/bambu-farm-monitor), with credit retained for the original foundation and community contributions.
 
 ## Features
 
@@ -29,7 +33,7 @@ docker run -d \
   -p 5000:5000 \
   -p 5001:5001 \
   -v /path/to/config:/app/config \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 Then navigate to `http://localhost:8080` and follow the setup wizard!
@@ -40,7 +44,7 @@ Then navigate to `http://localhost:8080` and follow the setup wizard!
 version: '3'
 services:
   bambu-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"  # Web UI

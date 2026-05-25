@@ -47,7 +47,7 @@ Automated PowerShell script that installs Docker Desktop (or Podman Desktop) and
 
 ```powershell
 # Download the script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/neospektra/bambu-farm-monitor/main/scripts/install-windows.ps1" -OutFile "$env:TEMP\install-windows.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mythikwolf/bambu-farm-monitor/main/scripts/install-windows.ps1" -OutFile "$env:TEMP\install-windows.ps1"
 
 # Run it
 & "$env:TEMP\install-windows.ps1"
@@ -66,7 +66,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/neospektra/bambu-farm-
    - Verifies installation is working
 
 3. **Image Download**
-   - Pulls the latest `neospektra/bambu-farm-monitor:latest` image from Docker Hub
+   - Pulls the latest `mythikwolf/bambu-farm-monitor:latest` image from Docker Hub
 
 4. **Configuration**
    - Optionally configures up to 4 printers interactively
@@ -171,7 +171,7 @@ podman restart bambu-farm-monitor
 # Update to latest version
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 # Then run the script again or start manually
 ```
 
@@ -192,7 +192,7 @@ For issues or questions:
 - See the [Windows Installation Guide](../docs/wiki/Windows-Installation.md)
 - Check [Common Issues](../docs/wiki/Common-Issues.md)
 - Review the [FAQ](../docs/wiki/FAQ.md)
-- Open an issue: https://github.com/neospektra/bambu-farm-monitor/issues
+- Open an issue: https://github.com/mythikwolf/bambu-farm-monitor/issues
 
 ---
 

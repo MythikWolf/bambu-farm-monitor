@@ -22,7 +22,7 @@ No file transfer needed! Container Station will download directly from Docker Hu
 1. Open **Container Station** from QTS menu
 2. Click **Create** button (top of page)
 3. Select **Create Container**
-4. In the **Image** field, type: `neospektra/bambu-farm-monitor:latest`
+4. In the **Image** field, type: `mythikwolf/bambu-farm-monitor:latest`
 5. Container Station will automatically pull the image
 6. Skip to Step 2 below
 
@@ -60,7 +60,7 @@ Full path should be: `/share/Container/bambu-config`
 
 **If you used Option B (Tar File):**
 1. In Container Station, go to **Images** tab
-2. Find `bambu-farm-monitor` or `neospektra/bambu-farm-monitor` in the image list
+2. Find `bambu-farm-monitor` or `mythikwolf/bambu-farm-monitor` in the image list
 3. Click the **Create** button next to it
 
 #### Container Configuration Wizard:
@@ -170,7 +170,7 @@ If you originally deployed from Docker Hub:
 
 4. **Pull Latest Image**:
    - Container Station > Images
-   - Find `neospektra/bambu-farm-monitor:latest`
+   - Find `mythikwolf/bambu-farm-monitor:latest`
    - Click the **⟳** (refresh/pull) icon to get the latest version
 
 5. **Recreate Container**:
@@ -296,7 +296,7 @@ If you encounter issues not covered here:
 
 You can deploy using either:
 
-- **Docker Hub**: `neospektra/bambu-farm-monitor:latest` (Recommended - no file transfer needed!)
+- **Docker Hub**: `mythikwolf/bambu-farm-monitor:latest` (Recommended - no file transfer needed!)
 - **Tar File**: `bambu-farm-monitor.tar` (548 MB) - For offline installation
 
 Documentation included:

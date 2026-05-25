@@ -33,7 +33,7 @@ See [Finding Printer Information](Finding-Printer-Information.md) for details on
 ### Step 1: Pull the Image
 
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 2: Create Volume (Optional but Recommended)
@@ -55,7 +55,7 @@ docker run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Port Mapping Explained:**
@@ -86,7 +86,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"   # Web UI
@@ -129,7 +129,7 @@ Podman is ideal for rootless containers and is commonly used on QNAP and Synolog
 ### Step 1: Pull the Image
 
 ```bash
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 ```
 
 Note: Podman requires the full registry path `docker.io/`
@@ -145,7 +145,7 @@ podman run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 3: Enable Auto-Start (Optional)
@@ -214,7 +214,7 @@ See [Backup and Restore](Backup-and-Restore.md) for more information.
 ### Docker
 
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
 # Run the docker run command again
@@ -230,7 +230,7 @@ docker-compose up -d
 ### Podman
 
 ```bash
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 podman stop bambu-farm-monitor
 podman rm bambu-farm-monitor
 # Run the podman run command again

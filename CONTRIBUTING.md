@@ -156,10 +156,10 @@ bambu-farm-monitor/
 4. Push tag: `git push origin v2.1.0`
 5. Build and push Docker image:
    ```bash
-   docker build -t neospektra/bambu-farm-monitor:v2.1.0 .
-   docker tag neospektra/bambu-farm-monitor:v2.1.0 neospektra/bambu-farm-monitor:latest
-   docker push neospektra/bambu-farm-monitor:v2.1.0
-   docker push neospektra/bambu-farm-monitor:latest
+   docker build -t mythikwolf/bambu-farm-monitor:v2.1.0 .
+   docker tag mythikwolf/bambu-farm-monitor:v2.1.0 mythikwolf/bambu-farm-monitor:latest
+   docker push mythikwolf/bambu-farm-monitor:v2.1.0
+   docker push mythikwolf/bambu-farm-monitor:latest
    ```
 6. Create GitHub release with changelog
 

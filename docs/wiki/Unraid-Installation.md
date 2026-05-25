@@ -44,14 +44,14 @@ If not already installed:
 
 1. Click **Apps** tab
 2. Search for: `bambu farm monitor`
-3. Look for **Bambu Farm Monitor** by neospektra
+3. Look for **Bambu Farm Monitor** by MythikWolf
 4. Click on the application
 
 ### Step 2: Configure Template
 
 **Basic Settings:**
 - **Name:** `bambu-farm-monitor` (or customize)
-- **Repository:** `neospektra/bambu-farm-monitor:latest`
+- **Repository:** `mythikwolf/bambu-farm-monitor:latest`
 - **Network Type:** `bridge`
 
 **Port Mappings:**
@@ -106,13 +106,13 @@ Monitor multiple Bambu Lab 3D printers with live video streams,
 real-time status updates, and AMS filament tracking.
 ```
 
-**Repository:** `neospektra/bambu-farm-monitor:latest`
+**Repository:** `mythikwolf/bambu-farm-monitor:latest`
 
-**Docker Hub URL:** `https://hub.docker.com/r/neospektra/bambu-farm-monitor`
+**Docker Hub URL:** `https://hub.docker.com/r/mythikwolf/bambu-farm-monitor`
 
 **Icon URL:**
 ```
-https://raw.githubusercontent.com/neospektra/bambu-farm-monitor/main/frontend/public/logo192.png
+https://raw.githubusercontent.com/mythikwolf/bambu-farm-monitor/main/frontend/public/logo192.png
 ```
 
 **Network Type:** `bridge`
@@ -176,7 +176,7 @@ chmod 777 /mnt/user/appdata/bambu-farm-monitor
 ### Step 3: Pull Image
 
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 4: Run Container
@@ -191,7 +191,7 @@ docker run -d \
   -p 5001:5001 \
   -v /mnt/user/appdata/bambu-farm-monitor:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### Step 5: Verify
@@ -325,11 +325,11 @@ See [Reverse Proxy Setup](Reverse-Proxy-Setup.md) for details.
 2. Click container icon → **Edit**
 3. Change repository from:
    ```
-   neospektra/bambu-farm-monitor:latest
+   mythikwolf/bambu-farm-monitor:latest
    ```
    to specific version:
    ```
-   neospektra/bambu-farm-monitor:3.3.9
+   mythikwolf/bambu-farm-monitor:3.3.9
    ```
 4. Click **Apply**
 
@@ -408,7 +408,7 @@ top
 
 ```bash
 # Pull latest image
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 
 # Stop container
 docker stop bambu-farm-monitor
@@ -423,7 +423,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v /mnt/user/appdata/bambu-farm-monitor:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Or via Web UI:**
@@ -628,17 +628,17 @@ If you want to submit to Community Applications:
 <?xml version="1.0"?>
 <Container version="2">
   <Name>bambu-farm-monitor</Name>
-  <Repository>neospektra/bambu-farm-monitor:latest</Repository>
-  <Registry>https://hub.docker.com/r/neospektra/bambu-farm-monitor</Registry>
+  <Repository>mythikwolf/bambu-farm-monitor:latest</Repository>
+  <Registry>https://hub.docker.com/r/mythikwolf/bambu-farm-monitor</Registry>
   <Network>bridge</Network>
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/neospektra/bambu-farm-monitor/discussions</Support>
-  <Project>https://github.com/neospektra/bambu-farm-monitor</Project>
+  <Support>https://github.com/mythikwolf/bambu-farm-monitor/discussions</Support>
+  <Project>https://github.com/mythikwolf/bambu-farm-monitor</Project>
   <Overview>Monitor multiple Bambu Lab 3D printers with live video streams, real-time status updates, and AMS filament tracking. Simple web interface for managing your print farm.</Overview>
   <Category>Tools: Productivity: Status:Stable</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
-  <Icon>https://raw.githubusercontent.com/neospektra/bambu-farm-monitor/main/frontend/public/logo192.png</Icon>
+  <Icon>https://raw.githubusercontent.com/mythikwolf/bambu-farm-monitor/main/frontend/public/logo192.png</Icon>
   <Config Name="Web UI" Target="8080" Default="8080" Mode="tcp" Description="Web interface" Type="Port" Display="always" Required="true" Mask="false">8080</Config>
   <Config Name="go2rtc" Target="1984" Default="1984" Mode="tcp" Description="Video streaming" Type="Port" Display="always" Required="true" Mask="false">1984</Config>
   <Config Name="Config API" Target="5000" Default="5000" Mode="tcp" Description="Configuration API" Type="Port" Display="always" Required="true" Mask="false">5000</Config>
@@ -668,5 +668,5 @@ Save as `bambu-farm-monitor.xml` and submit to CA repository.
 For Unraid-specific issues:
 - Check Docker logs in Web UI
 - Verify Docker service is enabled
-- Ask in [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- Ask in [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 - Or Unraid forums (Docker Support section)

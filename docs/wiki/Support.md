@@ -5,8 +5,8 @@ Get help with Bambu Farm Monitor.
 ## Quick Links
 
 - 📖 **[Documentation Home](Home.md)** - Complete documentation
-- 🐛 **[Report Bug](https://github.com/neospektra/bambu-farm-monitor/issues/new)** - File a bug report
-- 💬 **[Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)** - Ask questions
+- 🐛 **[Report Bug](https://github.com/mythikwolf/bambu-farm-monitor/issues/new)** - File a bug report
+- 💬 **[Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)** - Ask questions
 - ❓ **[FAQ](FAQ.md)** - Frequently asked questions
 - 🔧 **[Common Issues](Common-Issues.md)** - Troubleshooting guide
 
@@ -24,7 +24,7 @@ Get help with Bambu Farm Monitor.
 ### 2. Search Existing Issues
 
 **Check if already reported:**
-1. Go to [GitHub Issues](https://github.com/neospektra/bambu-farm-monitor/issues)
+1. Go to [GitHub Issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
 2. Use search bar
 3. Check both open and closed issues
 4. Look for similar problems
@@ -32,7 +32,7 @@ Get help with Bambu Farm Monitor.
 ### 3. Search Discussions
 
 **Check community discussions:**
-1. Go to [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+1. Go to [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 2. Search for keywords
 3. Browse categories:
    - Q&A
@@ -47,12 +47,12 @@ Get help with Bambu Farm Monitor.
 docker inspect bambu-farm-monitor | grep -i version
 
 # Latest available
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 **Update if old:**
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
 # Run container again
@@ -82,7 +82,7 @@ docker rm bambu-farm-monitor
 - Show and tell
 
 **How to ask:**
-1. Go to [Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+1. Go to [Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 2. Click **"New discussion"**
 3. Select category:
    - **Q&A** - Questions and answers
@@ -131,7 +131,7 @@ What I'm trying to do...
 - Support requests (use Discussions)
 
 **How to report:**
-1. Go to [Issues](https://github.com/neospektra/bambu-farm-monitor/issues)
+1. Go to [Issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
 2. Click **"New issue"**
 3. Choose template (if available)
 4. Fill in all sections
@@ -367,7 +367,7 @@ curl http://localhost:8080
 
 **4. Update to Latest:**
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 # Recreate container
 ```
 

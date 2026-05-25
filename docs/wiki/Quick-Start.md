@@ -11,7 +11,7 @@ Get up and running with Bambu Farm Monitor in 5 minutes.
 ## Step 1: Pull the Docker Image
 
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
 This downloads the latest version from Docker Hub (~500 MB).
@@ -27,7 +27,7 @@ docker run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 **What this does:**
@@ -248,7 +248,7 @@ docker run -d \
   -p 5003:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 Then access at `http://localhost:8081`
@@ -289,7 +289,7 @@ docker rm bambu-farm-monitor
 
 ### Update to Latest Version
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
 # Run the docker run command again
@@ -313,5 +313,5 @@ You now have a fully functional print farm monitoring system.
 
 - **Documentation:** Browse the wiki
 - **Common Issues:** [Common Issues](Common-Issues.md)
-- **Discussions:** https://github.com/neospektra/bambu-farm-monitor/discussions
-- **Bug Reports:** https://github.com/neospektra/bambu-farm-monitor/issues
+- **Discussions:** https://github.com/mythikwolf/bambu-farm-monitor/discussions
+- **Bug Reports:** https://github.com/mythikwolf/bambu-farm-monitor/issues

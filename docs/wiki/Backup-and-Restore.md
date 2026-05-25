@@ -345,7 +345,7 @@ crontab -e
 3. **On new server:**
    ```bash
    # Install Bambu Farm Monitor
-   docker pull neospektra/bambu-farm-monitor:latest
+   docker pull mythikwolf/bambu-farm-monitor:latest
 
    # Run container
    docker run -d \
@@ -353,7 +353,7 @@ crontab -e
      -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
      -v bambu-config:/app/config \
      --restart unless-stopped \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
 
    # Wait for startup
    sleep 10
@@ -394,7 +394,7 @@ docker cp bambu-farm-monitor:/app/config/printers.json \
   ./bambu-backup-before-upgrade.json
 
 # 2. Pull new version
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 
 # 3. Stop and remove old container
 docker stop bambu-farm-monitor
@@ -406,7 +406,7 @@ docker run -d \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 
 # 5. Verify configuration persisted
 curl http://localhost:5000/api/config/printers
@@ -512,13 +512,13 @@ gpg --decrypt bambu-config-2025-01-11.json.gpg > \
 **Recovery:**
 ```bash
 # 1. Reinstall container
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker run -d \
   --name bambu-farm-monitor \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 
 # 2. Wait for startup
 sleep 10

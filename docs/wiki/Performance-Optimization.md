@@ -105,7 +105,7 @@ docker update --cpus=2.5 bambu-farm-monitor  # On 5-core system
 ```yaml
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest
+    image: mythikwolf/bambu-farm-monitor:latest
     deploy:
       resources:
         limits:
@@ -482,7 +482,7 @@ docker run -d \
   --name bambu-farm-monitor-1 \
   -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
   -v bambu-config-1:/app/config \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 # Printers 1-8
 ```
 
@@ -492,7 +492,7 @@ docker run -d \
   --name bambu-farm-monitor-2 \
   -p 8081:8080 -p 1985:1984 -p 5002:5000 -p 5003:5001 \
   -v bambu-config-2:/app/config \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 # Printers 9-16
 ```
 

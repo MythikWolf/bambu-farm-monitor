@@ -3,8 +3,12 @@
 A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers. Monitor your entire print farm from a single dashboard with real-time video streams and MQTT status updates.
 
 ![Version](https://img.shields.io/badge/version-3.4.0-blue.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/neospektra/bambu-farm-monitor)
+![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+## Fork Notice
+
+This is MythikWolf's maintained fork of Bambu Farm Monitor. The project is based on the original work by [neospektra](https://github.com/neospektra/bambu-farm-monitor), with credit retained for the original foundation and community contributions.
 
 ## ✨ Features
 
@@ -46,9 +50,9 @@ A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers
 
 ### Docker Hub
 
-**All images are hosted on Docker Hub:** https://hub.docker.com/r/neospektra/bambu-farm-monitor
+**All images are hosted on Docker Hub:** https://hub.docker.com/r/mythikwolf/bambu-farm-monitor
 
-The image name `neospektra/bambu-farm-monitor:latest` automatically pulls from Docker Hub.
+The image name `mythikwolf/bambu-farm-monitor:latest` automatically pulls from Docker Hub.
 
 ### Windows Automated Installation 🪟
 
@@ -73,7 +77,7 @@ The script will:
 
 ```bash
 # Pull from Docker Hub
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 
 # Run the container
 docker run -d \
@@ -84,7 +88,7 @@ docker run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 #### Option 2: Docker Compose (Recommended for Production)
@@ -96,7 +100,7 @@ version: '3.8'
 
 services:
   bambu-farm-monitor:
-    image: neospektra/bambu-farm-monitor:latest  # From Docker Hub
+    image: mythikwolf/bambu-farm-monitor:latest  # From Docker Hub
     container_name: bambu-farm-monitor
     ports:
       - "8080:8080"   # Web UI
@@ -118,7 +122,7 @@ docker-compose up -d
 
 ```bash
 # Pull from Docker Hub (Podman also uses Docker Hub by default)
-podman pull docker.io/neospektra/bambu-farm-monitor:latest
+podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
 
 # Run the container
 podman run -d \
@@ -129,7 +133,7 @@ podman run -d \
   -p 5001:5001 \
   -v bambu-config:/app/config \
   --restart unless-stopped \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### First-Time Setup
@@ -190,7 +194,7 @@ docker run -d \
   -e PRINTER2_CODE="87654321" \
   -e PRINTER2_NAME="Farm X1C #1" \
   -e PRINTER2_SERIAL="01P00A411800002" \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ## 🏢 Platform-Specific Deployment
@@ -215,26 +219,26 @@ The automated script handles:
 
 1. **Container Station Method:**
    - Open Container Station
-   - Go to "Images" → Search for `neospektra/bambu-farm-monitor` on Docker Hub
+   - Go to "Images" → Search for `mythikwolf/bambu-farm-monitor` on Docker Hub
    - Download the `latest` tag
    - Or click "Create" → "Create Application" and paste the Docker Compose configuration above
 
 2. **Command Line Method (SSH):**
    ```bash
    # Pull from Docker Hub
-   podman pull docker.io/neospektra/bambu-farm-monitor:latest
+   podman pull docker.io/mythikwolf/bambu-farm-monitor:latest
    podman run -d \
      --name bambu-farm-monitor \
      -p 8080:8080 -p 1984:1984 -p 5000:5000 -p 5001:5001 \
      -v /share/Container/bambu-config:/app/config \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
    ```
 
 ### Synology NAS
 
 1. Open Docker app (or Container Manager on DSM 7.2+)
 2. Go to "Registry" tab
-3. Search for `neospektra/bambu-farm-monitor` (searches Docker Hub by default)
+3. Search for `mythikwolf/bambu-farm-monitor` (searches Docker Hub by default)
 4. Select the image and click "Download"
 5. Choose the `latest` tag
 6. Go to "Image" tab → Select the downloaded image → Click "Launch"
@@ -251,7 +255,7 @@ The automated script handles:
 1. Go to Docker tab
 2. Click "Add Container"
 3. Fill in the template:
-   - Repository: `neospektra/bambu-farm-monitor:latest` (pulls from Docker Hub)
+   - Repository: `mythikwolf/bambu-farm-monitor:latest` (pulls from Docker Hub)
    - Name: `bambu-farm-monitor`
    - Port: `8080` → `8080`
    - Port: `1984` → `1984`
@@ -301,7 +305,7 @@ docker run -d \
   -p 1985:1984 \
   -p 5002:5000 \
   -p 5003:5001 \
-  neospektra/bambu-farm-monitor:latest
+  mythikwolf/bambu-farm-monitor:latest
 ```
 
 ### P1P/P1S MQTT not connecting
@@ -389,7 +393,7 @@ Areas that need help:
 - ✅ Fixed `entrypoint.sh` bugs that prevented `go2rtc.yaml` and `printers.json` from generating correctly
 - ✅ Added printer model dropdown to settings UI
 - ✅ Modernized `style.css`
-- 🙏 Camera stream fix research by [@kitaro5053](https://github.com/kitaro5053) in [#5](https://github.com/neospektra/bambu-farm-monitor/issues/5)
+- 🙏 Camera stream fix research by [@kitaro5053](https://github.com/kitaro5053) in upstream issue [#5](https://github.com/neospektra/bambu-farm-monitor/issues/5)
 
 ### v3.3.9
 - ✅ Added nginx sub_filter to replace go2rtc's hardcoded GitHub manifest URL with local copy
@@ -482,14 +486,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [go2rtc](https://github.com/AlexxIT/go2rtc) - Excellent WebRTC streaming solution
 - [BambuSource2Raw](https://github.com/hisptoot/BambuSource2Raw) - Bambu camera streaming protocol
-- [@kitaro5053](https://github.com/kitaro5053) - Research and documentation of the `rtspx://` camera stream fix ([#5](https://github.com/neospektra/bambu-farm-monitor/issues/5))
+- [neospektra](https://github.com/neospektra/bambu-farm-monitor) - Original Bambu Farm Monitor project and foundation for this fork
+- [@kitaro5053](https://github.com/kitaro5053) - Research and documentation of the `rtspx://` camera stream fix (upstream [#5](https://github.com/neospektra/bambu-farm-monitor/issues/5))
 - Bambu Lab community for documentation and support
 
 ## 📧 Support
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/neospektra/bambu-farm-monitor/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
-- 📖 **Documentation**: [Wiki](https://github.com/neospektra/bambu-farm-monitor/wiki)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
+- 📖 **Documentation**: [Wiki](https://github.com/mythikwolf/bambu-farm-monitor/wiki)
 
 ## ⭐ Show Your Support
 
@@ -505,8 +510,8 @@ If you find this project useful, please consider:
 
 ## 🔗 Links
 
-- 🐳 **Docker Hub**: https://hub.docker.com/r/neospektra/bambu-farm-monitor
-- 💻 **GitHub Repository**: https://github.com/neospektra/bambu-farm-monitor
-- 📖 **Documentation**: [Wiki](https://github.com/neospektra/bambu-farm-monitor/wiki)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/neospektra/bambu-farm-monitor/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- 🐳 **Docker Hub**: https://hub.docker.com/r/mythikwolf/bambu-farm-monitor
+- 💻 **GitHub Repository**: https://github.com/mythikwolf/bambu-farm-monitor
+- 📖 **Documentation**: [Wiki](https://github.com/mythikwolf/bambu-farm-monitor/wiki)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/mythikwolf/bambu-farm-monitor/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)

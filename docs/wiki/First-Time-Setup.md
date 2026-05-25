@@ -468,5 +468,5 @@ After successful setup:
 
 If you encounter issues during setup:
 - Check [Common Issues](Common-Issues.md)
-- Search [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- Search [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 - Ask for help in [Support](Support.md)

@@ -21,16 +21,16 @@ This guide covers the most frequently encountered issues and their solutions.
 
 1. **Verify image name:**
    ```bash
-   docker pull neospektra/bambu-farm-monitor:latest
+   docker pull mythikwolf/bambu-farm-monitor:latest
    ```
    Make sure you're using the correct repository name.
 
 2. **Check Docker Hub status:**
-   Visit https://hub.docker.com/r/neospektra/bambu-farm-monitor to verify the image exists
+   Visit https://hub.docker.com/r/mythikwolf/bambu-farm-monitor to verify the image exists
 
 3. **Try with explicit registry:**
    ```bash
-   docker pull docker.io/neospektra/bambu-farm-monitor:latest
+   docker pull docker.io/mythikwolf/bambu-farm-monitor:latest
    ```
 
 4. **Check Docker authentication:**
@@ -66,7 +66,7 @@ This guide covers the most frequently encountered issues and their solutions.
      -p 1985:1984 \
      -p 5002:5000 \
      -p 5003:5001 \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
    ```
 
 4. **Check for zombie containers:**
@@ -123,7 +123,7 @@ This guide covers the most frequently encountered issues and their solutions.
    ```bash
    docker run -d --rm \
      --name bambu-farm-monitor \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
    docker logs -f bambu-farm-monitor
    ```
 
@@ -282,7 +282,7 @@ This guide covers the most frequently encountered issues and their solutions.
 
 3. **Update to latest version:**
    ```bash
-   docker pull neospektra/bambu-farm-monitor:latest
+   docker pull mythikwolf/bambu-farm-monitor:latest
    docker-compose up -d
    ```
 
@@ -355,7 +355,7 @@ This guide covers the most frequently encountered issues and their solutions.
    ```bash
    docker run -d \
      -v bambu-config:/app/config \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
    ```
 
 2. **Check volume still exists:**
@@ -368,7 +368,7 @@ This guide covers the most frequently encountered issues and their solutions.
    ```bash
    docker run -d \
      -v $(pwd)/config:/app/config \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
    ```
 
 4. **Export configuration as backup:**
@@ -469,7 +469,7 @@ This guide covers the most frequently encountered issues and their solutions.
 2. **Set memory limits:**
    ```bash
    docker run -d --memory="1g" --memory-swap="1g" \
-     neospektra/bambu-farm-monitor:latest
+     mythikwolf/bambu-farm-monitor:latest
    ```
 
 3. **Monitor for leaks:**
@@ -527,7 +527,7 @@ This guide covers the most frequently encountered issues and their solutions.
 1. **Update to latest version:**
    - CORS issues fixed in v3.3.9+
    ```bash
-   docker pull neospektra/bambu-farm-monitor:latest
+   docker pull mythikwolf/bambu-farm-monitor:latest
    docker-compose up -d
    ```
 
@@ -574,13 +574,13 @@ If your problem isn't listed here:
    ```
 
 2. **Search existing issues:**
-   https://github.com/neospektra/bambu-farm-monitor/issues
+   https://github.com/mythikwolf/bambu-farm-monitor/issues
 
 3. **Ask in Discussions:**
-   https://github.com/neospektra/bambu-farm-monitor/discussions
+   https://github.com/mythikwolf/bambu-farm-monitor/discussions
 
 4. **Open a new issue:**
-   https://github.com/neospektra/bambu-farm-monitor/issues/new
+   https://github.com/mythikwolf/bambu-farm-monitor/issues/new
 
    Include:
    - Version number

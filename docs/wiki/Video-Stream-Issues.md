@@ -565,7 +565,7 @@ nmap -p 8080,1984,5000,5001 SERVER_IP
 
 **Check for updates:**
 ```bash
-docker pull neospektra/bambu-farm-monitor:latest
+docker pull mythikwolf/bambu-farm-monitor:latest
 docker stop bambu-farm-monitor
 docker rm bambu-farm-monitor
 # Re-create container
@@ -621,7 +621,7 @@ docker logs bambu-farm-monitor --tail 100 --follow
    - List troubleshooting steps already attempted
 
 **Where to ask:**
-- [GitHub Discussions](https://github.com/neospektra/bambu-farm-monitor/discussions)
+- [GitHub Discussions](https://github.com/mythikwolf/bambu-farm-monitor/discussions)
 - Include all above information
 - Be specific about symptoms
 
