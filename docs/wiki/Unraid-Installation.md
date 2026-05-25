@@ -329,7 +329,7 @@ See [Reverse Proxy Setup](Reverse-Proxy-Setup.md) for details.
    ```
    to specific version:
    ```
-   mythikwolf/bambu-farm-monitor:3.3.9
+   mythikwolf/bambu-farm-monitor:3.4.3
    ```
 4. Click **Apply**
 

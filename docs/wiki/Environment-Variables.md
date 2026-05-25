@@ -37,7 +37,9 @@ PRINTER{N}_{FIELD}=value
 
 **Where:**
 - `{N}` = Printer number (1, 2, 3, ...)
-- `{FIELD}` = Configuration field (IP, CODE, NAME, SERIAL)
+- `{FIELD}` = Configuration field (IP, CODE, NAME, SERIAL, MODEL)
+
+The entrypoint scans printer numbers up to `MAX_PRINTERS` (default `16`).
 
 ### Required Variables Per Printer
 
@@ -64,6 +66,16 @@ PRINTER{N}_{FIELD}=value
 - Format: `01P00A411800001`
 - Example: `PRINTER1_SERIAL=01P00A411800001`
 
+**PRINTER{N}_MODEL**
+- Optional printer model metadata
+- Example: `PRINTER1_MODEL=x1c`
+- Stored in `printers.json` for future model-specific behavior
+
+**MAX_PRINTERS**
+- Highest printer number to scan during startup
+- Default: `16`
+- Example: `MAX_PRINTERS=24`
+
 ## Examples
 
 ### Single Printer
@@ -78,6 +90,7 @@ docker run -d \
   -e PRINTER1_CODE=12345678 \
   -e PRINTER1_NAME="My P1S" \
   -e PRINTER1_SERIAL=01P00A411800001 \
+  -e PRINTER1_MODEL=p1s \
   --restart unless-stopped \
   mythikwolf/bambu-farm-monitor:latest
 ```
@@ -153,24 +166,30 @@ services:
       - PRINTER1_CODE=12345678
       - PRINTER1_NAME=Farm P1S #1
       - PRINTER1_SERIAL=01P00A411800001
+      - PRINTER1_MODEL=p1s
 
       # Printer 2
       - PRINTER2_IP=192.168.1.101
       - PRINTER2_CODE=87654321
       - PRINTER2_NAME=Farm P1S #2
       - PRINTER2_SERIAL=01P00A411800002
+      - PRINTER2_MODEL=p1s
 
       # Printer 3
       - PRINTER3_IP=192.168.1.102
       - PRINTER3_CODE=11111111
       - PRINTER3_NAME=Farm X1C #1
       - PRINTER3_SERIAL=01X00C411800001
+      - PRINTER3_MODEL=x1c
 
       # Printer 4
       - PRINTER4_IP=192.168.1.103
       - PRINTER4_CODE=22222222
       - PRINTER4_NAME=Farm X1C #2
       - PRINTER4_SERIAL=01X00C411800002
+      - PRINTER4_MODEL=x1c
+
+      - MAX_PRINTERS=16
     restart: unless-stopped
 
 volumes:

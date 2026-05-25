@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
-![Version](https://img.shields.io/badge/version-3.4.2-green.svg)
+![Version](https://img.shields.io/badge/version-3.4.3-green.svg)
 
 A unified web-based monitoring solution for Bambu Lab 3D printers with real-time video streaming and MQTT status integration.
 
@@ -13,12 +13,14 @@ This is MythikWolf's maintained fork of Bambu Farm Monitor. It is based on the o
 ## Features
 
 - **Live Video Streaming**: Low-latency WebRTC streams from all printers via go2rtc
+- **Native RTSP-over-TLS**: go2rtc connects directly to Bambu printer cameras with `rtspx://`
 - **Real-time Status Monitoring**: MQTT integration for live print status, temperatures, progress, and layer information
 - **Setup Wizard**: Easy first-time configuration with guided setup
 - **Dynamic Configuration**: Web-based interface to manage printer settings without rebuilding
 - **Printer Model Support**: P1P, P1S, X1C, P2S, H2S, A1 and more
 - **Fullscreen Support**: Individual fullscreen capability for each camera feed
 - **Persistent Configuration**: Settings persist across container restarts via volume mounts
+- **No Local Build Assets Required**: Docker builds do not require local BambuP1SCam/build asset folders
 - **Modern Responsive UI**: Clean interface with icons, gradients, and mobile support
 
 ## Quick Start
@@ -95,7 +97,7 @@ On first run, you'll be greeted with a setup wizard that guides you through:
 ## Building from Source
 
 ```bash
-git clone https://github.com/yourusername/bambu-farm-monitor.git
+git clone https://github.com/mythikwolf/bambu-farm-monitor.git
 cd bambu-farm-monitor
 
 docker build -t bambu-farm-monitor:latest .
@@ -126,6 +128,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 - **[AlexxIT](https://github.com/AlexxIT)** for go2rtc
+- **[neospektra](https://github.com/neospektra/bambu-farm-monitor)** for the original Bambu Farm Monitor project and upstream native stream build cleanup
 - **[@kitaro5053](https://github.com/kitaro5053)** for research and documentation of the `rtspx://` camera stream fix
 - **Bambu Lab** for making great printers
 

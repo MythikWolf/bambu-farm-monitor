@@ -219,7 +219,7 @@ podman run -d `
 
 ### Method 3: Pre-configuring Printers with Environment Variables
 
-You can configure up to 4 printers using environment variables in docker-compose.yml:
+You can configure multiple printers using environment variables in docker-compose.yml. Startup scans `PRINTER{N}_*` variables up to `MAX_PRINTERS` (default `16`):
 
 ```yaml
 version: '3.8'

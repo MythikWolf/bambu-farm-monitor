@@ -110,9 +110,9 @@ https://hub.docker.com/r/mythikwolf/bambu-farm-monitor
 docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
-**`:3.3.9`** - Specific version
+**`:3.4.3`** - Specific version
 ```bash
-docker pull mythikwolf/bambu-farm-monitor:3.3.9
+docker pull mythikwolf/bambu-farm-monitor:3.4.3
 ```
 
 **`:dev`** - Development builds (not recommended for production)
@@ -122,15 +122,16 @@ docker pull mythikwolf/bambu-farm-monitor:dev
 
 ### Image Details
 
-**Base Image:** Alpine Linux
+**Base Image:** Debian 12 slim
 **Size:** ~500 MB
 **Architecture:** amd64/x86_64
 **Includes:**
-- Python 3.11
+- Python 3
 - Flask (APIs)
-- React (Frontend)
+- Vanilla HTML/CSS/JavaScript frontend
 - go2rtc (Video streaming)
 - paho-mqtt (MQTT client)
+- Native `rtspx://` camera stream generation, with no local BambuP1SCam/build assets required
 
 ## Deployment Methods
 

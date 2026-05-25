@@ -110,7 +110,7 @@ cat bambu-backup-*.json
 {
   "printers": [...],
   "exported_at": "2025-01-11T10:30:00Z",
-  "version": "3.3.9"
+  "version": "3.4.0"
 }
 ```
 

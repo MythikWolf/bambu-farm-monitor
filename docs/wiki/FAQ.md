@@ -179,11 +179,11 @@ All can be remapped if needed.
 
 ### How does video streaming work?
 
-1. BambuSource2Raw captures RTSP stream from printer
-2. go2rtc transcodes to WebRTC
+1. go2rtc connects directly to the printer camera with `rtspx://bblp:<access_code>@<ip>:322/streaming/live/1`
+2. go2rtc transcodes the stream to WebRTC/MSE
 3. Browser displays WebRTC stream via MSE (Media Source Extensions)
 
-This provides low-latency live streaming without plugins.
+This provides low-latency live streaming without browser plugins or BambuP1SCam wrapper scripts.
 
 ### How does status monitoring work?
 

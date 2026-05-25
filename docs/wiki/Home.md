@@ -50,10 +50,10 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 
 ## 🆕 Latest Updates
 
-### Version 3.4.2
-- ✅ Added printer model selection to the first-run setup wizard
-- ✅ Added X2D to setup wizard model selection
-- ✅ Persisted selected printer model during setup
+### Version 3.4.3
+- ✅ Merged upstream native go2rtc `rtspx://` camera stream generation
+- ✅ Removed local BambuP1SCam/build asset dependency from Docker image builds
+- ✅ Retained MythikWolf fork branding while crediting neospektra's original work
 
 See the full [Changelog](https://github.com/mythikwolf/bambu-farm-monitor/blob/main/README.md#-changelog) for details.
 

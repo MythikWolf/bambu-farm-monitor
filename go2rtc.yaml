@@ -1,15 +1,15 @@
 streams:
   # Printer 1: Farm P1S AMS-1
-  printer1: "exec:/app/BambuP1SCam start_stream_local -s ${PRINTER1_IP} -a ${PRINTER1_CODE}#video=h264#hardware"
+  printer1: "rtspx://bblp:${PRINTER1_CODE}@${PRINTER1_IP}:322/streaming/live/1"
 
   # Printer 2: Farm P1S AMS-2
-  printer2: "exec:/app/BambuP1SCam start_stream_local -s ${PRINTER2_IP} -a ${PRINTER2_CODE}#video=h264#hardware"
+  printer2: "rtspx://bblp:${PRINTER2_CODE}@${PRINTER2_IP}:322/streaming/live/1"
 
   # Printer 3: Farm P1S AMS-3A
-  printer3: "exec:/app/BambuP1SCam start_stream_local -s ${PRINTER3_IP} -a ${PRINTER3_CODE}#video=h264#hardware"
+  printer3: "rtspx://bblp:${PRINTER3_CODE}@${PRINTER3_IP}:322/streaming/live/1"
 
   # Printer 4: Farm P1S AMS-4
-  printer4: "exec:/app/BambuP1SCam start_stream_local -s ${PRINTER4_IP} -a ${PRINTER4_CODE}#video=h264#hardware"
+  printer4: "rtspx://bblp:${PRINTER4_CODE}@${PRINTER4_IP}:322/streaming/live/1"
 
 # API settings
 api:
