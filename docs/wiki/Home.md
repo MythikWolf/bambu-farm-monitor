@@ -50,11 +50,10 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 
 ## 🆕 Latest Updates
 
-### Version 3.3.9
-- ✅ Visual icon-based layout selector
-- ✅ AMS filament color display with humidity
-- ✅ Fixed CORS errors from go2rtc
-- ✅ Layout persistence across sessions
+### Version 3.4.1
+- ✅ Added X2D printer model support
+- ✅ Added X2D to direct `rtspx://` camera stream handling
+- ✅ Updated fork branding, Docker image references, and attribution
 
 See the full [Changelog](https://github.com/mythikwolf/bambu-farm-monitor/blob/main/README.md#-changelog) for details.
 

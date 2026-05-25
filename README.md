@@ -2,7 +2,7 @@
 
 A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers. Monitor your entire print farm from a single dashboard with real-time video streams and MQTT status updates.
 
-![Version](https://img.shields.io/badge/version-3.4.0-blue.svg)
+![Version](https://img.shields.io/badge/version-3.4.1-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -388,7 +388,12 @@ Areas that need help:
 
 ## 📋 Changelog
 
-### v3.4.0 (Latest)
+### v3.4.1 (Latest)
+- ✅ Added X2D printer model support to the settings dropdown
+- ✅ Added X2D to direct `rtspx://` camera stream handling
+- ✅ Updated fork branding, Docker image references, and attribution for the MythikWolf fork
+
+### v3.4.0
 - ✅ Rewrote `entrypoint.sh` to correctly implement `rtspx://` direct connections, fixing camera streams for X1C, P2S, and H2S printers
 - ✅ Fixed `entrypoint.sh` bugs that prevented `go2rtc.yaml` and `printers.json` from generating correctly
 - ✅ Added printer model dropdown to settings UI

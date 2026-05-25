@@ -286,7 +286,7 @@ volumes:
 # Main installation process
 function Start-Installation {
     Write-Header "Bambu Farm Monitor - Windows Installation"
-    Write-ColorOutput "Version 3.3.9" "Gray"
+    Write-ColorOutput "Version 3.4.1" "Gray"
     Write-Host ""
     Write-Info "This script will help you install and configure Bambu Farm Monitor"
     Write-Host ""
