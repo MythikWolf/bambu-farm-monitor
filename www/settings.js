@@ -8,6 +8,7 @@ const PRINTER_MODELS = [
     { value: 'a1', label: 'A1' },
     { value: 'x1c', label: 'X1C' },
     { value: 'x1', label: 'X1' },
+    { value: 'x2d', label: 'X2D' },
     { value: 'p2s', label: 'P2S' },
     { value: 'h2s', label: 'H2S' },
     { value: 'h2d', label: 'H2D' },

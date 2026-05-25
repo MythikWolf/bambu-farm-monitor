@@ -4,7 +4,7 @@ set -e
 # =============================================================================
 # entrypoint.sh for bambu-farm-monitor
 # Stream method is selected based on printer model:
-#   - X1C, X1, P2S, H2S, H2D  -> rtspx:// direct connection (port 322)
+#   - X1C, X1, X2D, P2S, H2S, H2D  -> rtspx:// direct connection (port 322)
 #   - P1S, P1P, A1             -> BambuP1SCam start_stream_local (port 6000)
 #
 # Configuration priority:
@@ -50,7 +50,7 @@ import stat
 CONFIG_FILE = '/app/config/printers.json'
 GO2RTC_YAML = '/app/go2rtc.yaml'
 
-RTSPX_MODELS = {'x1c', 'x1', 'p2s', 'h2s', 'h2d'}
+RTSPX_MODELS = {'x1c', 'x1', 'x2d', 'p2s', 'h2s', 'h2d'}
 
 def uses_rtspx(model):
     return str(model).lower() in RTSPX_MODELS
