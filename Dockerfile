@@ -32,7 +32,8 @@ COPY api/ /app/api/
 
 RUN sed -i 's/\r$//' /app/entrypoint.sh /app/api/*.py && \
     chmod +x /app/entrypoint.sh && \
-    chmod +x /app/api/*.py
+    chmod +x /app/api/*.py && \
+    chmod -R a+rX /var/www/html
 
 # Expose ports
 # 8080: Web UI
