@@ -148,7 +148,8 @@
             opacity: 0.9;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 12px;
             background: rgba(255, 255, 255, 0.1);
@@ -158,7 +159,12 @@
             font-size: 1rem;
         }
 
-        .form-group input:focus {
+        .form-group select option {
+            color: #111;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #66bb6a;
             background: rgba(255, 255, 255, 0.15);
@@ -412,6 +418,24 @@
         });
 
         // Generate printer forms
+        const PRINTER_MODELS = [
+            { value: 'p1s', label: 'P1S' },
+            { value: 'p1p', label: 'P1P' },
+            { value: 'a1', label: 'A1' },
+            { value: 'x1c', label: 'X1C' },
+            { value: 'x1', label: 'X1' },
+            { value: 'x2d', label: 'X2D' },
+            { value: 'p2s', label: 'P2S' },
+            { value: 'h2s', label: 'H2S' },
+            { value: 'h2d', label: 'H2D' },
+        ];
+
+        function modelOptions(selected = 'p1s') {
+            return PRINTER_MODELS.map(model =>
+                `<option value="${model.value}" ${model.value === selected ? 'selected' : ''}>${model.label}</option>`
+            ).join('');
+        }
+
         function generatePrinterForms() {
             const container = document.getElementById('printer-forms');
             container.innerHTML = '';
@@ -437,6 +461,13 @@
                         <small>8-digit MQTT access code from printer settings</small>
                     </div>
                     <div class="form-group">
+                        <label>Printer Model</label>
+                        <select id="model-${i}">
+                            ${modelOptions('p1s')}
+                        </select>
+                        <small>Select the model so the correct camera stream method is used</small>
+                    </div>
+                    <div class="form-group">
                         <label>Serial Number (Optional)</label>
                         <input type="text" id="serial-${i}" placeholder="01P00A411800001">
                         <small>Required for real-time status monitoring</small>
@@ -453,6 +484,7 @@
                 const name = document.getElementById(`name-${i}`).value || `Printer ${i}`;
                 const ip = document.getElementById(`ip-${i}`).value.trim();
                 const code = document.getElementById(`code-${i}`).value.trim();
+                const model = document.getElementById(`model-${i}`).value;
                 const serial = document.getElementById(`serial-${i}`).value.trim();
 
                 if (!ip || !code) {
@@ -460,7 +492,7 @@
                     return null;
                 }
 
-                printers.push({ name, ip, access_code: code, serial });
+                printers.push({ name, ip, access_code: code, serial, model });
             }
             return printers;
         }

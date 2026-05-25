@@ -50,10 +50,10 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 
 ## 🆕 Latest Updates
 
-### Version 3.4.1
-- ✅ Added X2D printer model support
-- ✅ Added X2D to direct `rtspx://` camera stream handling
-- ✅ Updated fork branding, Docker image references, and attribution
+### Version 3.4.2
+- ✅ Added printer model selection to the first-run setup wizard
+- ✅ Added X2D to setup wizard model selection
+- ✅ Persisted selected printer model during setup
 
 See the full [Changelog](https://github.com/mythikwolf/bambu-farm-monitor/blob/main/README.md#-changelog) for details.
 

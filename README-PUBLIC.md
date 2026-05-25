@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
-![Version](https://img.shields.io/badge/version-3.4.1-green.svg)
+![Version](https://img.shields.io/badge/version-3.4.2-green.svg)
 
 A unified web-based monitoring solution for Bambu Lab 3D printers with real-time video streaming and MQTT status integration.
 
