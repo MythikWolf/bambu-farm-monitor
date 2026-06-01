@@ -1,10 +1,12 @@
 FROM alexxit/go2rtc:1.9.4 AS go2rtc
+FROM mythikwolf/bambu-farm-monitor:3.4.1 AS bambu-camera-assets
 
 FROM debian:12-slim
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     bash \
+    libcurl4 \
     nginx \
     supervisor \
     python3 \
@@ -17,6 +19,15 @@ WORKDIR /app
 # Copy go2rtc binary from the official image
 COPY --from=go2rtc /usr/local/bin/go2rtc /usr/local/bin/go2rtc
 RUN chmod +x /usr/local/bin/go2rtc
+
+# Copy Bambu camera wrapper runtime assets from the last known-good image.
+# The native rtspx path is unreliable for some users, so go2rtc streams are fed
+# through BambuP1SCam wrapper scripts without requiring local build_assets.
+COPY --from=bambu-camera-assets /app/BambuP1SCam /app/BambuP1SCam
+COPY --from=bambu-camera-assets /app/libBambuSource.so /app/libBambuSource.so
+COPY --from=bambu-camera-assets /app/libbambu_networking.so /app/libbambu_networking.so
+RUN chmod +x /app/BambuP1SCam && \
+    chmod a+r /app/libBambuSource.so /app/libbambu_networking.so
 
 # Install Python dependencies for API
 COPY api/requirements.txt /app/api/requirements.txt

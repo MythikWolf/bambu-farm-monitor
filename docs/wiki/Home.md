@@ -50,9 +50,9 @@ Welcome to the Bambu Farm Monitor documentation! This wiki provides comprehensiv
 
 ## 🆕 Latest Updates
 
-### Version 3.4.3
-- ✅ Merged upstream native go2rtc `rtspx://` camera stream generation
-- ✅ Removed local BambuP1SCam/build asset dependency from Docker image builds
+### Version 3.4.4
+- ✅ Restored BambuP1SCam wrapper-based camera stream generation
+- ✅ Sources BambuP1SCam runtime assets from the prior known-good Docker image without requiring local `build_assets/`
 - ✅ Retained MythikWolf fork branding while crediting neospektra's original work
 
 See the full [Changelog](https://github.com/mythikwolf/bambu-farm-monitor/blob/main/README.md#-changelog) for details.

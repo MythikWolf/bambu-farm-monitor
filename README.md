@@ -2,7 +2,7 @@
 
 A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers. Monitor your entire print farm from a single dashboard with real-time video streams and MQTT status updates.
 
-![Version](https://img.shields.io/badge/version-3.4.3-blue.svg)
+![Version](https://img.shields.io/badge/version-3.4.4-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -14,7 +14,7 @@ This is MythikWolf's maintained fork of Bambu Farm Monitor. The project is based
 
 ### Video & Streaming
 - 🎥 **Real-time Video Streams** - Live camera feeds from all your Bambu Lab printers using WebRTC via go2rtc
-- 🔐 **Native RTSP-over-TLS** - Uses go2rtc `rtspx://` streams directly from Bambu printers on port 322
+- 🔐 **BambuP1SCam Camera Wrapper** - Uses the proven BambuP1SCam stream wrapper with go2rtc for camera feeds
 - 📐 **Resizable Windows** - Customize printer window sizes to your preference with drag handles
 - 🖼️ **Layout Options** - Choose from multiple grid layouts (1 column, 2x2, 2 columns, 3 columns, 4 columns)
 - 🎯 **Visual Layout Selector** - Icon-based layout buttons with active state highlighting
@@ -36,7 +36,7 @@ This is MythikWolf's maintained fork of Bambu Farm Monitor. The project is based
 
 ### Deployment & Platform
 - 🐳 **Single Container** - All-in-one Docker container for easy deployment
-- 🔧 **No Local Build Assets Required** - Docker builds no longer depend on local BambuP1SCam/build asset folders
+- 🔧 **No Local Build Assets Required** - Docker builds source BambuP1SCam runtime assets from the prior known-good image
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile devices
 - 🏢 **NAS Compatible** - Tested on QNAP, Synology, Unraid with Docker/Podman
 - 🌐 **Generic Branding** - Works with all Bambu Lab printer models (P1S, X1C, A1, H2S, etc.)
@@ -389,11 +389,17 @@ Areas that need help:
 
 ## 📋 Changelog
 
-### v3.4.3 (Latest)
+### v3.4.4 (Latest)
+- ✅ Restored BambuP1SCam wrapper-based camera streaming after reports that direct `rtspx://` streams were unreliable
+- ✅ Sources BambuP1SCam runtime assets from the prior known-good Docker image without requiring local `build_assets/`
+- ✅ Uses `exec:/app/stream<N>.sh#video=h264#hardware` wrapper streams for configured printers
+- 🙏 Camera stream work builds on [neospektra's original project](https://github.com/neospektra/bambu-farm-monitor)
+
+### v3.4.3
 - ✅ Merged upstream native go2rtc `rtspx://` camera stream generation
 - ✅ Removed local BambuP1SCam/build asset dependency from Docker image builds
-- ✅ Uses `rtspx://bblp:<access_code>@<ip>:322/streaming/live/1` for configured printer streams
-- 🙏 Native stream build cleanup merged from [neospektra's original project](https://github.com/neospektra/bambu-farm-monitor)
+- ✅ Used `rtspx://bblp:<access_code>@<ip>:322/streaming/live/1` for configured printer streams
+- ⚠️ Superseded by v3.4.4 after reports that direct `rtspx://` streams were unreliable for some users
 
 ### v3.4.2
 - ✅ Added printer model dropdown to the first-run setup wizard
@@ -503,7 +509,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [go2rtc](https://github.com/AlexxIT/go2rtc) - Excellent WebRTC streaming solution
 - [BambuSource2Raw](https://github.com/hisptoot/BambuSource2Raw) - Bambu camera streaming protocol
 - [neospektra](https://github.com/neospektra/bambu-farm-monitor) - Original Bambu Farm Monitor project and foundation for this fork
-- [@kitaro5053](https://github.com/kitaro5053) - Research and documentation of the `rtspx://` camera stream fix (upstream [#5](https://github.com/neospektra/bambu-farm-monitor/issues/5))
+- [@kitaro5053](https://github.com/kitaro5053) - Research and documentation of Bambu camera stream behavior (upstream [#5](https://github.com/neospektra/bambu-farm-monitor/issues/5))
 - Bambu Lab community for documentation and support
 
 ## 📧 Support

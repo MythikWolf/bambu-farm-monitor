@@ -10,8 +10,8 @@ import json
 import os
 import subprocess
 import signal
+import shlex
 from datetime import datetime
-from urllib.parse import quote
 
 app = Flask(__name__)
 CORS(app)
@@ -34,9 +34,19 @@ def save_config(config):
     with open(CONFIG_FILE, 'w') as f:
         json.dump(config, f, indent=2)
 
-def rtspx_stream_url(ip, access_code):
-    """Build go2rtc's native RTSP-over-TLS URL for Bambu Lab cameras"""
-    return f"rtspx://bblp:{quote(str(access_code), safe='')}@{ip}:322/streaming/live/1"
+def write_stream_script(printer_id, ip, access_code):
+    """Write a BambuP1SCam wrapper for one configured printer stream"""
+    script_path = f'/app/stream{printer_id}.sh'
+    script_content = f"""#!/bin/bash
+export LD_LIBRARY_PATH=/app:$LD_LIBRARY_PATH
+cd /app
+exec ./BambuP1SCam start_stream_local -s {shlex.quote(ip)} -a {shlex.quote(access_code)}
+"""
+
+    with open(script_path, 'w', encoding='utf-8', newline='\n') as f:
+        f.write(script_content)
+
+    os.chmod(script_path, 0o755)
 
 def regenerate_go2rtc_config(config):
     """Regenerate go2rtc.yaml from printer configuration"""
@@ -52,8 +62,9 @@ def regenerate_go2rtc_config(config):
             continue
 
         stream_lines.append(f"  # Printer {printer_id}: {str(name).replace(chr(10), ' ')}")
-        stream_lines.append(f"  printer{printer_id}: \"{rtspx_stream_url(ip, code)}\"")
+        stream_lines.append(f"  printer{printer_id}: \"exec:/app/stream{printer_id}.sh#video=h264#hardware\"")
         stream_lines.append("")
+        write_stream_script(printer_id, ip, code)
 
     streams_config = "streams:\n" + "\n".join(stream_lines) + "\n" if stream_lines else "streams: {}\n"
 

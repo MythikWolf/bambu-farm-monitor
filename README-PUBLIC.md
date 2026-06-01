@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
-![Version](https://img.shields.io/badge/version-3.4.3-green.svg)
+![Version](https://img.shields.io/badge/version-3.4.4-green.svg)
 
 A unified web-based monitoring solution for Bambu Lab 3D printers with real-time video streaming and MQTT status integration.
 
@@ -13,14 +13,14 @@ This is MythikWolf's maintained fork of Bambu Farm Monitor. It is based on the o
 ## Features
 
 - **Live Video Streaming**: Low-latency WebRTC streams from all printers via go2rtc
-- **Native RTSP-over-TLS**: go2rtc connects directly to Bambu printer cameras with `rtspx://`
+- **BambuP1SCam Camera Wrapper**: go2rtc receives camera streams through BambuP1SCam wrapper scripts
 - **Real-time Status Monitoring**: MQTT integration for live print status, temperatures, progress, and layer information
 - **Setup Wizard**: Easy first-time configuration with guided setup
 - **Dynamic Configuration**: Web-based interface to manage printer settings without rebuilding
 - **Printer Model Support**: P1P, P1S, X1C, P2S, H2S, A1 and more
 - **Fullscreen Support**: Individual fullscreen capability for each camera feed
 - **Persistent Configuration**: Settings persist across container restarts via volume mounts
-- **No Local Build Assets Required**: Docker builds do not require local BambuP1SCam/build asset folders
+- **No Local Build Assets Required**: Docker builds source BambuP1SCam runtime assets from the prior known-good image
 - **Modern Responsive UI**: Clean interface with icons, gradients, and mobile support
 
 ## Quick Start
@@ -128,8 +128,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 - **[AlexxIT](https://github.com/AlexxIT)** for go2rtc
-- **[neospektra](https://github.com/neospektra/bambu-farm-monitor)** for the original Bambu Farm Monitor project and upstream native stream build cleanup
-- **[@kitaro5053](https://github.com/kitaro5053)** for research and documentation of the `rtspx://` camera stream fix
+- **[neospektra](https://github.com/neospektra/bambu-farm-monitor)** for the original Bambu Farm Monitor project
+- **[@kitaro5053](https://github.com/kitaro5053)** for research and documentation of Bambu camera stream behavior
 - **Bambu Lab** for making great printers
 
 ## Support

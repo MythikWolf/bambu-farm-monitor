@@ -110,9 +110,9 @@ https://hub.docker.com/r/mythikwolf/bambu-farm-monitor
 docker pull mythikwolf/bambu-farm-monitor:latest
 ```
 
-**`:3.4.3`** - Specific version
+**`:3.4.4`** - Specific version
 ```bash
-docker pull mythikwolf/bambu-farm-monitor:3.4.3
+docker pull mythikwolf/bambu-farm-monitor:3.4.4
 ```
 
 **`:dev`** - Development builds (not recommended for production)
@@ -131,7 +131,7 @@ docker pull mythikwolf/bambu-farm-monitor:dev
 - Vanilla HTML/CSS/JavaScript frontend
 - go2rtc (Video streaming)
 - paho-mqtt (MQTT client)
-- Native `rtspx://` camera stream generation, with no local BambuP1SCam/build assets required
+- BambuP1SCam wrapper-based camera stream generation without requiring local build assets
 
 ## Deployment Methods
 

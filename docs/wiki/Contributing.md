@@ -41,7 +41,7 @@ Both printers should show video streams.
 - OS: Ubuntu 22.04
 - Docker: 24.0.5
 - Browser: Chrome 120
-- Bambu Farm Monitor: 3.4.3
+- Bambu Farm Monitor: 3.4.4
 
 **Logs**
 ```

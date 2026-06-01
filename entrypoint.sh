@@ -79,12 +79,14 @@ else
   echo "Using existing configuration at /app/config/printers.json"
 fi
 
-# Generate go2rtc.yaml from the active printer configuration. Bambu Lab cameras
-# expose RTSP-over-TLS on port 322, which go2rtc supports directly as rtspx.
+# Generate go2rtc.yaml from the active printer configuration. Camera streams are
+# fed through BambuP1SCam wrapper scripts because direct rtspx streams are not
+# reliable across all reported setups.
 echo "Generating go2rtc configuration..."
 python3 <<'PY'
 import json
-from urllib.parse import quote
+import os
+import shlex
 
 with open("/app/config/printers.json", "r", encoding="utf-8") as config_file:
     config = json.load(config_file)
@@ -99,10 +101,17 @@ for printer in config.get("printers", []):
     if not printer_id or not ip or not access_code:
         continue
 
-    encoded_code = quote(access_code, safe="")
+    script_path = f"/app/stream{printer_id}.sh"
     stream_lines.append(f"  # Printer {printer_id}: {name}")
-    stream_lines.append(f"  printer{printer_id}: \"rtspx://bblp:{encoded_code}@{ip}:322/streaming/live/1\"")
+    stream_lines.append(f"  printer{printer_id}: \"exec:{script_path}#video=h264#hardware\"")
     stream_lines.append("")
+
+    with open(script_path, "w", encoding="utf-8", newline="\n") as stream_file:
+        stream_file.write("#!/bin/bash\n")
+        stream_file.write("export LD_LIBRARY_PATH=/app:$LD_LIBRARY_PATH\n")
+        stream_file.write("cd /app\n")
+        stream_file.write(f"exec ./BambuP1SCam start_stream_local -s {shlex.quote(ip)} -a {shlex.quote(access_code)}\n")
+    os.chmod(script_path, 0o755)
 
 lines = ["streams:"] + stream_lines if stream_lines else ["streams: {}"]
 

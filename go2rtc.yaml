@@ -1,15 +1,15 @@
 streams:
   # Printer 1: Farm P1S AMS-1
-  printer1: "rtspx://bblp:${PRINTER1_CODE}@${PRINTER1_IP}:322/streaming/live/1"
+  printer1: "exec:/app/stream1.sh#video=h264#hardware"
 
   # Printer 2: Farm P1S AMS-2
-  printer2: "rtspx://bblp:${PRINTER2_CODE}@${PRINTER2_IP}:322/streaming/live/1"
+  printer2: "exec:/app/stream2.sh#video=h264#hardware"
 
   # Printer 3: Farm P1S AMS-3A
-  printer3: "rtspx://bblp:${PRINTER3_CODE}@${PRINTER3_IP}:322/streaming/live/1"
+  printer3: "exec:/app/stream3.sh#video=h264#hardware"
 
   # Printer 4: Farm P1S AMS-4
-  printer4: "rtspx://bblp:${PRINTER4_CODE}@${PRINTER4_IP}:322/streaming/live/1"
+  printer4: "exec:/app/stream4.sh#video=h264#hardware"
 
 # API settings
 api:
