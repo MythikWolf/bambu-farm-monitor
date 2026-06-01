@@ -33,6 +33,17 @@ echo "========================================"
 echo "First time setup: Navigate to the Web UI to configure your printers"
 echo "========================================"
 
+cat > /app/BambuNetworkEngine.conf <<'CONF'
+{
+  "country_code": "us",
+  "last_monitor_machine": "dummy",
+  "user": {
+    "user_id": "0",
+    "token": "dummy_token"
+  }
+}
+CONF
+
 # Create initial printer configuration JSON if it doesn't exist
 if [ ! -f /app/config/printers.json ]; then
   echo "Creating initial printer configuration..."
@@ -79,14 +90,16 @@ else
   echo "Using existing configuration at /app/config/printers.json"
 fi
 
-# Generate go2rtc.yaml from the active printer configuration. Camera streams are
-# fed through BambuP1SCam wrapper scripts because direct rtspx streams are not
-# reliable across all reported setups.
+# Generate go2rtc.yaml from the active printer configuration. Models with a
+# native RTSP-over-TLS server use rtspx directly. P1/A1-style models use the
+# BambuP1SCam wrapper because they do not expose the same port 322 stream.
 echo "Generating go2rtc configuration..."
 python3 <<'PY'
 import json
 import os
 import shlex
+
+RTSPX_MODELS = {"x1c", "x1", "x2d", "p2s", "h2s", "h2d"}
 
 with open("/app/config/printers.json", "r", encoding="utf-8") as config_file:
     config = json.load(config_file)
@@ -97,21 +110,30 @@ for printer in config.get("printers", []):
     name = str(printer.get("name", f"Printer {printer_id}")).replace("\n", " ")
     ip = str(printer.get("ip", "")).strip()
     access_code = str(printer.get("access_code", "")).strip()
+    model = str(printer.get("model", "")).strip().lower()
 
     if not printer_id or not ip or not access_code:
         continue
 
     script_path = f"/app/stream{printer_id}.sh"
     stream_lines.append(f"  # Printer {printer_id}: {name}")
-    stream_lines.append(f"  printer{printer_id}: \"exec:{script_path}#video=h264#hardware\"")
-    stream_lines.append("")
 
-    with open(script_path, "w", encoding="utf-8", newline="\n") as stream_file:
-        stream_file.write("#!/bin/bash\n")
-        stream_file.write("export LD_LIBRARY_PATH=/app:$LD_LIBRARY_PATH\n")
-        stream_file.write("cd /app\n")
-        stream_file.write(f"exec ./BambuP1SCam start_stream_local -s {shlex.quote(ip)} -a {shlex.quote(access_code)}\n")
-    os.chmod(script_path, 0o755)
+    if model in RTSPX_MODELS:
+        quoted_code = access_code.replace("\\", "\\\\").replace('"', '\\"')
+        quoted_ip = ip.replace("\\", "\\\\").replace('"', '\\"')
+        stream_lines.append(
+            f"  printer{printer_id}: \"rtspx://bblp:{quoted_code}@{quoted_ip}:322/streaming/live/1\""
+        )
+    else:
+        stream_lines.append(f"  printer{printer_id}: \"exec:{script_path}#video=h264#hardware\"")
+        with open(script_path, "w", encoding="utf-8", newline="\n") as stream_file:
+            stream_file.write("#!/bin/bash\n")
+            stream_file.write("export LD_LIBRARY_PATH=/app:$LD_LIBRARY_PATH\n")
+            stream_file.write("cd /app\n")
+            stream_file.write(f"exec ./BambuP1SCam start_stream_local -s {shlex.quote(ip)} -a {shlex.quote(access_code)}\n")
+        os.chmod(script_path, 0o755)
+
+    stream_lines.append("")
 
 lines = ["streams:"] + stream_lines if stream_lines else ["streams: {}"]
 

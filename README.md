@@ -2,7 +2,7 @@
 
 A comprehensive web-based monitoring solution for multiple Bambu Lab 3D printers. Monitor your entire print farm from a single dashboard with real-time video streams and MQTT status updates.
 
-![Version](https://img.shields.io/badge/version-3.4.4-blue.svg)
+![Version](https://img.shields.io/badge/version-3.4.5-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -14,7 +14,7 @@ This is MythikWolf's maintained fork of Bambu Farm Monitor. The project is based
 
 ### Video & Streaming
 - 🎥 **Real-time Video Streams** - Live camera feeds from all your Bambu Lab printers using WebRTC via go2rtc
-- 🔐 **BambuP1SCam Camera Wrapper** - Uses the proven BambuP1SCam stream wrapper with go2rtc for camera feeds
+- 🔐 **Mixed Camera Routing** - Uses native `rtspx://` for X/P2/H2-style models and BambuP1SCam wrapper streams for P1/A1-style models
 - 📐 **Resizable Windows** - Customize printer window sizes to your preference with drag handles
 - 🖼️ **Layout Options** - Choose from multiple grid layouts (1 column, 2x2, 2 columns, 3 columns, 4 columns)
 - 🎯 **Visual Layout Selector** - Icon-based layout buttons with active state highlighting
@@ -389,7 +389,12 @@ Areas that need help:
 
 ## 📋 Changelog
 
-### v3.4.4 (Latest)
+### v3.4.5 (Latest)
+
+- ✅ Restored mixed camera routing: `rtspx://` direct streams for X1/X2/P2/H2 models and BambuP1SCam wrapper streams for P1/A1 models
+- ✅ Adds the minimal BambuNetworkEngine.conf shim needed by BambuP1SCam wrapper startup
+
+### v3.4.4
 - ✅ Restored BambuP1SCam wrapper-based camera streaming after reports that direct `rtspx://` streams were unreliable
 - ✅ Sources BambuP1SCam runtime assets from the prior known-good Docker image without requiring local `build_assets/`
 - ✅ Uses `exec:/app/stream<N>.sh#video=h264#hardware` wrapper streams for configured printers

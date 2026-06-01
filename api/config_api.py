@@ -18,6 +18,7 @@ CORS(app)
 
 CONFIG_FILE = '/app/config/printers.json'
 GO2RTC_YAML = '/app/go2rtc.yaml'
+RTSPX_MODELS = {'x1c', 'x1', 'x2d', 'p2s', 'h2s', 'h2d'}
 
 def load_config():
     """Load printer configuration from JSON file"""
@@ -57,14 +58,18 @@ def regenerate_go2rtc_config(config):
         name = printer['name']
         ip = str(printer.get('ip', '')).strip()
         code = str(printer.get('access_code', '')).strip()
+        model = str(printer.get('model', '')).strip().lower()
 
         if not ip or not code:
             continue
 
         stream_lines.append(f"  # Printer {printer_id}: {str(name).replace(chr(10), ' ')}")
-        stream_lines.append(f"  printer{printer_id}: \"exec:/app/stream{printer_id}.sh#video=h264#hardware\"")
+        if model in RTSPX_MODELS:
+            stream_lines.append(f"  printer{printer_id}: \"rtspx://bblp:{code}@{ip}:322/streaming/live/1\"")
+        else:
+            stream_lines.append(f"  printer{printer_id}: \"exec:/app/stream{printer_id}.sh#video=h264#hardware\"")
+            write_stream_script(printer_id, ip, code)
         stream_lines.append("")
-        write_stream_script(printer_id, ip, code)
 
     streams_config = "streams:\n" + "\n".join(stream_lines) + "\n" if stream_lines else "streams: {}\n"
 

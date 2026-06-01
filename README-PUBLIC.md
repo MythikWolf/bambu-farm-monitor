@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mythikwolf/bambu-farm-monitor)
-![Version](https://img.shields.io/badge/version-3.4.4-green.svg)
+![Version](https://img.shields.io/badge/version-3.4.5-green.svg)
 
 A unified web-based monitoring solution for Bambu Lab 3D printers with real-time video streaming and MQTT status integration.
 
@@ -13,7 +13,7 @@ This is MythikWolf's maintained fork of Bambu Farm Monitor. It is based on the o
 ## Features
 
 - **Live Video Streaming**: Low-latency WebRTC streams from all printers via go2rtc
-- **BambuP1SCam Camera Wrapper**: go2rtc receives camera streams through BambuP1SCam wrapper scripts
+- **Mixed Camera Routing**: X/P2/H2-style models use native `rtspx://`; P1/A1-style models use BambuP1SCam wrapper streams
 - **Real-time Status Monitoring**: MQTT integration for live print status, temperatures, progress, and layer information
 - **Setup Wizard**: Easy first-time configuration with guided setup
 - **Dynamic Configuration**: Web-based interface to manage printer settings without rebuilding

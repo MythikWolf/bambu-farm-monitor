@@ -21,8 +21,8 @@ COPY --from=go2rtc /usr/local/bin/go2rtc /usr/local/bin/go2rtc
 RUN chmod +x /usr/local/bin/go2rtc
 
 # Copy Bambu camera wrapper runtime assets from the last known-good image.
-# The native rtspx path is unreliable for some users, so go2rtc streams are fed
-# through BambuP1SCam wrapper scripts without requiring local build_assets.
+# P1/A1-style models use these wrapper assets, while X/P2/H2-style models use
+# native rtspx streams directly.
 COPY --from=bambu-camera-assets /app/BambuP1SCam /app/BambuP1SCam
 COPY --from=bambu-camera-assets /app/libBambuSource.so /app/libBambuSource.so
 COPY --from=bambu-camera-assets /app/libbambu_networking.so /app/libbambu_networking.so
