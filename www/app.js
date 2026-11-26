@@ -325,37 +325,56 @@ function updatePrinterStatus(printerId, status) {
             return '';
         }
 
-        const traysHTML = amsData.trays.map((tray, index) => {
-            const isActive = amsData.active_tray === tray.id || amsData.active_tray === String(index);
+        const escapeHTML = (v) => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+        function trayHTML(tray, index) {
+            const isActive = amsData.active_tray === tray.id || (!amsData.units && amsData.active_tray === String(index));
             const color = tray.empty ? 'CCCCCC' : tray.color;
             const activeClass = isActive ? 'active' : '';
             const emptyClass = tray.empty ? 'empty' : '';
-            const type = tray.type || 'Empty';
-
+            // Show detailed name (e.g. "PETG HF") when available, else base type
+            let label = 'Empty';
+            if (!tray.empty) {
+                const type = tray.type || '';
+                const name = tray.name || '';
+                label = name && name !== type ? `${name} (${type})` : (name || type);
+            }
             return `
-                <div class="ams-tray ${activeClass} ${emptyClass}" title="${type}">
+                <div class="ams-tray ${activeClass} ${emptyClass}" title="${escapeHTML(label)}">
                     <div class="ams-color" style="background-color: #${color}"></div>
                     ${isActive ? '<div class="ams-indicator">▼</div>' : ''}
                 </div>
             `;
-        }).join('');
+        }
 
-        // Show humidity if available
-        const humidity = amsData.humidity || '0';
-        const humidityHTML = humidity !== '0' ? `<div class="ams-humidity" title="AMS Humidity">💧 ${humidity}%</div>` : '';
+        function humidityHTML(h) {
+            return h && h !== '0' ? `<div class="ams-humidity" title="AMS Humidity">💧 ${escapeHTML(h)}%</div>` : '';
+        }
+
+        // Multiple AMS units: one row per unit
+        if (amsData.units && amsData.units.length > 1) {
+            return amsData.units.map((unit, n) => `
+                <div class="ams-section">
+                    <div class="ams-label">AMS${n + 1}:</div>
+                    <div class="ams-trays">
+                        ${unit.trays.map(trayHTML).join('')}
+                    </div>
+                    ${humidityHTML(unit.humidity)}
+                </div>
+            `).join('');
+        }
 
         return `
             <div class="ams-section">
                 <div class="ams-label">AMS:</div>
                 <div class="ams-trays">
-                    ${traysHTML}
+                    ${amsData.trays.map(trayHTML).join('')}
                 </div>
-                ${humidityHTML}
+                ${humidityHTML(amsData.humidity || '0')}
             </div>
         `;
     }
 
-    // Update stream status indicator
     if (streamStatus) {
         if (mergedStatus.connected) {
             streamStatus.classList.add('connected');
