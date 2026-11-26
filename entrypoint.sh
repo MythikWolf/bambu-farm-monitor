@@ -99,7 +99,7 @@ import json
 import os
 import shlex
 
-RTSPX_MODELS = {"x1c", "x1", "x2d", "p2s", "h2s", "h2d"}
+RTSPX_MODELS = {"x1c", "x1", "x2d", "p2s", "h2s", "h2d", "h2c"}
 
 with open("/app/config/printers.json", "r", encoding="utf-8") as config_file:
     config = json.load(config_file)
