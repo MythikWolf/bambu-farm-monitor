@@ -18,7 +18,7 @@ CORS(app)
 
 CONFIG_FILE = '/app/config/printers.json'
 GO2RTC_YAML = '/app/go2rtc.yaml'
-RTSPX_MODELS = {'x1c', 'x1', 'x2d', 'p2s', 'h2s', 'h2d'}
+RTSPX_MODELS = {'x1c', 'x1', 'x2d', 'p2s', 'h2s', 'h2d', 'h2c'}
 
 def load_config():
     """Load printer configuration from JSON file"""
