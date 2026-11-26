@@ -105,49 +105,58 @@ def parse_bambu_status(payload):
                     ams_list = ams_data.get('ams', [])
 
                     if isinstance(ams_list, list) and len(ams_list) > 0:
-                        # Get first AMS unit
-                        ams_unit = ams_list[0]
+                        all_trays = []
+                        units = []
+                        for unit_index, ams_unit in enumerate(ams_list):
+                            if not isinstance(ams_unit, dict) or 'tray' not in ams_unit:
+                                continue
+                            try:
+                                unit_id = int(ams_unit.get('id', unit_index))
+                            except (TypeError, ValueError):
+                                unit_id = unit_index
 
-                        if isinstance(ams_unit, dict) and 'tray' in ams_unit:
+                            unit_trays = []
+                            for tray in ams_unit.get('tray', []) or []:
+                                if not isinstance(tray, dict):
+                                    continue
+                                # Color is RRGGBBAA - strip alpha
+                                color = tray.get('tray_color', 'CCCCCCFF')
+                                if isinstance(color, str) and len(color) >= 6:
+                                    color = color[:6].upper()
+                                else:
+                                    color = 'CCCCCC'
+                                tray_type = tray.get('tray_type', '')
+                                try:
+                                    slot = int(tray.get('id', len(unit_trays)))
+                                except (TypeError, ValueError):
+                                    slot = len(unit_trays)
+                                tray_info = {
+                                    # Global tray id, comparable with tray_now
+                                    'id': str(unit_id * 4 + slot),
+                                    'slot': slot,
+                                    'unit': unit_id,
+                                    'color': color,
+                                    'type': tray_type,
+                                    'name': tray.get('tray_sub_brands', ''),
+                                    'empty': tray_type == ''
+                                }
+                                unit_trays.append(tray_info)
+                                all_trays.append(tray_info)
+
+                            units.append({
+                                'id': unit_id,
+                                'humidity': ams_unit.get('humidity', '0'),
+                                'trays': unit_trays
+                            })
+
+                        if all_trays:
                             status['ams']['has_ams'] = True
-
-                            # Get humidity from AMS unit
-                            if 'humidity' in ams_unit:
-                                status['ams']['humidity'] = ams_unit.get('humidity', '0')
-
-                            # Get active tray from parent ams_data
+                            status['ams']['trays'] = all_trays
+                            status['ams']['units'] = units
+                            # Backward compatible: first unit humidity
+                            status['ams']['humidity'] = units[0]['humidity']
                             if 'tray_now' in ams_data:
                                 status['ams']['active_tray'] = str(ams_data['tray_now'])
-
-                            # Parse tray information
-                            tray_list = ams_unit.get('tray', [])
-                            if isinstance(tray_list, list):
-                                trays = []
-                                for tray in tray_list:
-                                    if not isinstance(tray, dict):
-                                        continue
-
-                                    # Get color (RRGGBBAA format - strip alpha)
-                                    color = tray.get('tray_color', 'CCCCCCFF')
-                                    if isinstance(color, str) and len(color) >= 6:
-                                        color = color[:6].upper()  # Strip FF alpha
-                                    else:
-                                        color = 'CCCCCC'
-
-                                    # Get type
-                                    tray_type = tray.get('tray_type', '')
-
-                                    tray_info = {
-                                        'id': str(tray.get('id', '')),
-                                        'color': color,
-                                        'type': tray_type,
-                                        'name': tray.get('tray_sub_brands', ''),
-                                        'empty': tray_type == ''
-                                    }
-                                    trays.append(tray_info)
-
-                                if trays:
-                                    status['ams']['trays'] = trays
 
             except Exception as e:
                 # Silently fail AMS parsing - don't break status updates

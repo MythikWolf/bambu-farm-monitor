@@ -12,6 +12,7 @@ const PRINTER_MODELS = [
     { value: 'p2s', label: 'P2S' },
     { value: 'h2s', label: 'H2S' },
     { value: 'h2d', label: 'H2D' },
+    { value: 'h2c', label: 'H2C' },
 ];
 
 function modelOptions(selected) {
